@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,8 +32,17 @@ Route::get('/login', [AuthController::class, 'userLogin'])->name('userLogin');
 
 Route::get('/logout', [AuthController::class, 'logout']);
 
+Route::get('/forget-password', [AuthController::class, 'forgetPasswordLoad']);
+Route::post('/forget-password', [AuthController::class, 'forgetPassword'])->name('forgetPassword');
+
+Route::get('/reset-password', [AuthController::class, 'resetPasswordLoad']);
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('resetPassword');
+
 Route::group(['middleware'=>['web', 'checkAdmin']], function(){
     Route::get('/admin/dashboard', [AuthController::class, 'adminDashboard']);
+
+    // Add subject
+    Route::post('/add-subject', [AdminController::class, 'addSubject'])->name('addSubject');
 });
 
 Route::group(['middleware'=>['web', 'checkStudent']], function(){

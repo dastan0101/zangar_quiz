@@ -13,7 +13,7 @@
     @endif
 
     @if (Session::has('error'))
-        <p style="color:green">{{ Session::get('msg') }}</p>
+        <p style="color:green">{{ Session::get('error') }}</p>
     @endif
 
     <form action="{{ route('userLogin') }}" method="GET">
@@ -22,5 +22,7 @@
         <input type="password" name="password" placeholder="Password">
         <button type="submit">Login</button>
     </form>
+
+    <a href="/forget-password">Forget Password</a>
 
 @endsection
