@@ -16,6 +16,7 @@
                 <th scope="col">Subject</th>
                 <th scope="col">Date</th>
                 <th scope="col">Time</th>
+                <th scope="col">Attempt</th>
                 <th scope="col">Edit</th>
                 <th scope="col">Delete</th>
             </tr>
@@ -28,7 +29,8 @@
                         <td>{{ $exam->exam_name }}</td>
                         <td>{{ $exam->subjects[0]['subject'] }}</td>
                         <td>{{ $exam->date }}</td>
-                        <td>{{ $exam->time }}</td>
+                        <td>{{ $exam->time }} hours</td>
+                        <td>{{ $exam->attempt }} time</td>
                         <td>
                             <button class="btn btn-info editButton" 
                                     data-id="{{ $exam->id }}" 
@@ -88,6 +90,9 @@
                         <br>
                         <label>Time</label>
                         <input type="time" name="time" required>
+                        <br>
+                        <label>Attempt</label>
+                        <input type="number" name="attempt" min="1" placeholder="Enter Exam Attempt Time" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -132,6 +137,10 @@
                         <br>
                         <label>Time</label>
                         <input type="time" name="time" id="time" required>
+                        <br>
+                        <label>Attempt</label>
+                        <input type="number" name="attempt" id="attempt" min="1" placeholder="Enter Exam Attempt Time" required>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -206,6 +215,7 @@
                             $("#subject_id").val(exam[0].subject_id);
                             $("#date").val(exam[0].date);
                             $("#time").val(exam[0].time);
+                            $("#attempt").val(exam[0].attempt);
                         } else {
                             alert(data.msg);
                         }

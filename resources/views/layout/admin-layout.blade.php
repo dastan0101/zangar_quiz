@@ -32,6 +32,10 @@
             <a href="/admin/exam"><span class="fa fa-tasks mr-3"></span> Exams</a>
           </li>
           
+          <li class="active">
+            <a href="/admin/question-answer"><span class="fa fa-question-circle mr-3"></span> Q&A</a>
+          </li>
+          
           <li>
             <a href="/logout"><span class="fa fa-sign-out mr-3"></span> Logout</a>
           </li>

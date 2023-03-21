@@ -13,7 +13,8 @@ class Exam extends Model
         'exam_name',
         'subject_id',
         'date',
-        'time'
+        'time',
+        'attemp'
     ];
 
     public function subjects() {

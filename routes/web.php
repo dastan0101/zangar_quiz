@@ -53,6 +53,9 @@ Route::group(['middleware'=>['web', 'checkAdmin']], function(){
     Route::post('/edit-exam', [AdminController::class, 'editExam'])->name('editExam');
     Route::post('/delete-exam', [AdminController::class, 'deleteExam'])->name('deleteExam');
 
+    // question and answer
+    Route::get('/admin/question-answer', [AdminController::class, 'questionAnswerDashboard']);
+
 });
 
 Route::group(['middleware'=>['web', 'checkStudent']], function(){
