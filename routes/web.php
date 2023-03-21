@@ -51,6 +51,7 @@ Route::group(['middleware'=>['web', 'checkAdmin']], function(){
     Route::post('/add-exam', [AdminController::class, 'addExam'])->name('addExam');
     Route::get('/get-exam-detail/{id}', [AdminController::class, 'getExamDetail'])->name('getExamDetail');
     Route::post('/edit-exam', [AdminController::class, 'editExam'])->name('editExam');
+    Route::post('/delete-exam', [AdminController::class, 'deleteExam'])->name('deleteExam');
 
 });
 

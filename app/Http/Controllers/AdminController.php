@@ -93,4 +93,14 @@ class AdminController extends Controller {
         }
     }
 
+    public function deleteExam(Request $request) {
+        try {
+            Exam::where('id', $request->exam_id)->delete();
+            return response()->json(['success'=>true, 'msg'=>'Exam deleted successfully!']);
+
+        } catch(\Exception $e) {
+            return response()->json(['success'=>false, 'msg'=>$e->getMessage()]);
+        }
+    }
+
 }

@@ -32,7 +32,6 @@
                         <td>
                             <button class="btn btn-info editButton" 
                                     data-id="{{ $exam->id }}" 
-                                    data-subject="{{ $exam->exam_name }}" 
                                     data-toggle="modal" 
                                     data-target="#editExamModel">
                                 Edit
@@ -143,6 +142,31 @@
         </div>
     </div>
 
+    <!-- Delete Exam Modal -->
+    <div class="modal fade" id="deleteExamModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addExamTitle">Edit Exam</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="deleteExam">
+                @csrf
+                    <div class="modal-body">
+                        <input type="hidden" name="exam_id" id="delete_exam_id">
+                        <p>Are you sure to delete this Exam?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
         $(document).ready(function() {
             $("#addExam").submit(function(e) {
@@ -211,18 +235,18 @@
 
             // delete subject
             $(".deleteButton").click(function() {
-                var subject_id = $(this).attr('data-id');
+                var exam_id = $(this).attr('data-id');
 
-                $("#delete_subject_id").val(subject_id);
+                $("#delete_exam_id").val(exam_id);
             });
 
-            $("#deleteSubject").submit(function(e) {
+            $("#deleteExam").submit(function(e) {
                 e.preventDefault();
 
                 var formData = $(this).serialize();
 
                 $.ajax({
-                    url:"{{ route('deleteSubject') }}",
+                    url:"{{ route('deleteExam') }}",
                     type:"POST",
                     data:formData,
                     success:function(data) {
