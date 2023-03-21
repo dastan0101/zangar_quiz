@@ -49,7 +49,8 @@ class AdminController extends Controller {
 
     public function examDashboard() {
         $subjects = Subject::all();
-        return view('admin.exam-dashboard', ['subjects'=>$subjects]);
+        $exams = Exam::with('subjects')->get();
+        return view('admin.exam-dashboard', ['subjects'=>$subjects, 'exams'=>$exams]);
     }
 
     public function addExam(Request $request) {
@@ -66,4 +67,30 @@ class AdminController extends Controller {
             return response()->json(['success'=>false, 'msg'=>$e->getMessage()]);
         }
     }
+    
+    public function getExamDetail($id) {
+        try {
+            $exam = Exam::where('id',$id)->get();
+            return response()->json(['success'=>true, 'data'=>$exam]);
+
+        } catch(\Exception $e) {
+            return response()->json(['success'=>false, 'msg'=>$e->getMessage()]);
+        }
+    }
+
+    public function editExam(Request $request) {
+        try {
+            $exam = Exam::find($request->exam_id);
+            $exam->exam_name = $request->exam_name;
+            $exam->subject_id = $request->subject_id;
+            $exam->date = $request->date;
+            $exam->time = $request->time;
+            $exam->save();
+            return response()->json(['success'=>true, 'msg'=>'Exam edited successfully!']);
+
+        } catch(\Exception $e) {
+            return response()->json(['success'=>false, 'msg'=>$e->getMessage()]);
+        }
+    }
+
 }
