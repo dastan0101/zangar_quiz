@@ -55,6 +55,7 @@ Route::group(['middleware'=>['web', 'checkAdmin']], function(){
 
     // question and answer
     Route::get('/admin/question-answer', [AdminController::class, 'questionAnswerDashboard']);
+    Route::post('/add-question-answer', [AdminController::class, 'addQna'])->name('addQna');
 
 });
 
