@@ -108,9 +108,8 @@ class AdminController extends Controller {
     }
     
     public function questionAnswerDashboard() {
-        $subjects = Subject::all();
-        $exams = Exam::with('subjects')->get();
-        return view('admin.question-answer-dashboard', ['subjects'=>$subjects, 'exams'=>$exams]);
+        $questions = Question::with('answers')->get();
+        return view('admin.question-answer-dashboard', compact('questions'));
     }
 
     public function addQna(Request $request) {
