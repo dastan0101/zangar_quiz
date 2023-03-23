@@ -144,6 +144,7 @@
     <script>
         // question
         $(document).ready(function(){
+            // add
             $("#addQna").submit(function (e) {
                 e.preventDefault();
 
@@ -271,7 +272,7 @@
                                 checked = 'checked';
                             }
 
-                            html += '<div class="row editAnswers ml-1 mt-2 mr-1"><input type="radio" '+checked+' name="is_correct" class="edit_is_correct"><div class="col"><input type="text" class="w-100" name="answers['+qna['answers'][i]['answer']+']" placeholder="Enter Answers" value="'+qna['answers'][i]['answer']+'" required></div><button class="btn btn-danger removeBtn">Remove</button></div>';
+                            html += '<div class="row editAnswers ml-1 mt-2 mr-1"><input type="radio" '+checked+' name="is_correct" class="edit_is_correct"><div class="col"><input type="text" class="w-100" name="answers['+qna['answers'][i]['id']+']" placeholder="Enter Answers" value="'+qna['answers'][i]['answer']+'" required></div><button class="btn btn-danger removeBtn removeAnswer" data-id="'+qna['answers'][i]['id']+'">Remove</button></div>';
                         }
                         $(".editModalAnswers").append(html);
                     }
@@ -299,15 +300,49 @@
                     }
 
                     if (checkIsCorrect) {
-                        
+
+                        var formData = $(this).serialize();
+
+                        $.ajax({
+                            url:"{{ route('editQna') }}",
+                            type:"POST",
+                            data:formData,
+                            success:function(data) {
+                                console.log(data);
+                                if (data.success == true) {
+                                    location.reload();
+                                } else {
+                                    alert(data.msg);
+                                }
+                            }
+                        });
                     } else {
                         $(".editError").text("Please select correct answer!");
-                    setTimeout(function() {
-                        $(".editError").text("");
-                    }, 2000);
+                        setTimeout(function() {
+                            $(".editError").text("");
+                        }, 2000);
                     }
 
                 }
+            });
+
+            // remove exist answer
+            $(document).on('click','.removeAnswer', function() {
+                var answer_id = $(this).attr('data-id');
+
+                $.ajax({
+                    url:"{{ route('deleteAnswer') }}",
+                    type:"GET",
+                    data:{id:answer_id},
+                    success:function() {
+                        if (data.success == true) {
+                            location.reload();
+                            // console.log(data.msg);
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                });
             });
 
         });
