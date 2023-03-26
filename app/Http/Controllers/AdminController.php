@@ -12,6 +12,11 @@ use App\Models\User;
 use App\Imports\QnaImport;
 use Maatwebsite\Excel\Facades\Excel;
 
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\URL;
+
 use function GuzzleHttp\Promise\all;
 
 class AdminController extends Controller {
@@ -238,5 +243,34 @@ class AdminController extends Controller {
         return view('admin.students-dashboard', compact('students'));
     }
     
+    // add student
+    public function addStudent(Request $request) {
+        try {
+            $password = Str::random(8);
+
+            User::insert([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($password),
+            ]);
+
+            $url = URL::to('/');
+
+            $data['url'] = $url;
+            $data['name'] = $request->name;
+            $data['email'] = $request->email;
+            $data['password'] = $password;
+            $data['title'] = "Student registration on Zangar-M";
+
+            Mail::send('registrationMail', ['data'=>$data], function($message) use ($data) {
+                $message->to($data['email'])->subject($data['title']);
+            });
+
+            return response()->json(['success'=>true, 'msg'=>"Student added succesfully!"]);
+
+        } catch(\Exception $e) {
+            return response()->json(['success'=>false, 'msg'=>$e->getMessage()]);
+        }
+    }
 }
  
