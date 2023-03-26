@@ -7,6 +7,10 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addQnaModal">
         Add Q&A
     </button>  
+
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#importQnaModal">
+        Import Q&A
+    </button>  
     
     {{-- Table --}}
     <table class="table">
@@ -15,6 +19,7 @@
             <th>Question</th>
             <th>Answers</th>
             <th>Edit</th>
+            <th>Delete</th>
         </thead>
         <tbody>
             @if (count($questions) > 0)
@@ -30,6 +35,11 @@
                     <td>
                         <button href="" class="editButton btn btn-info" data-id="{{ $question->id }}" data-toggle="modal" data-target="#editQnaModal">
                             Edit
+                        </button>
+                    </td>
+                    <td>
+                        <button href="" class="deleteButton btn btn-danger" data-id="{{ $question->id }}" data-toggle="modal" data-target="#deleteQnaModal">
+                            Delete
                         </button>
                     </td>
                 </tr>
@@ -137,6 +147,55 @@
                     <p class="error" style="color:red"></p>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Delete Question and Answer Modal -->
+    <div class="modal fade" id="deleteQnaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addQnaTitle">Delete Q&A</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="deleteQna">
+                @csrf
+                    <div class="modal-body">
+                        <input type="hidden" name="qna_id" id="delete_qna_id">
+                        <p>Are you sure you want to delete this Q&A?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import Question and Answer Modal -->
+    <div class="modal fade" id="importQnaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="importQnaTitle">Import Q&A</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="importQna" enctype="multipart/form-data">
+                @csrf
+                    <div class="modal-body">
+                        <input type="file" name="file" id=d files[0]" required accept=".csv, .xlsx">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-info">Import</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -345,6 +404,61 @@
                 });
             });
 
+            // import Q&A (excel and csv)
+            $("#importQna").submit(function(e) {
+                e.preventDefault();
+
+                let formData = new formData();
+
+                formData.append('file', fileupload files[0]);
+
+                $.ajaxSetup({
+                    headers:{
+                        "X-CSRF-TOKEN":"{{ csrf_token() }}"
+                    }
+                });
+
+                $.ajax({
+                    url:"{{ route('importQna') }}",
+                    type:"POST",
+                    data:formData,
+                    processData:false,
+                    contentType:false,
+                    success:function(data) {
+                        console.log(data);
+                        if (data.success == true) {
+                            // location.reload();
+                        } else {
+                            // alert(data.msg);
+                        }
+                    }
+                });
+            });
+
+            // delete question and answer
+            $(".deleteButton").click(function() {
+                var qnaId = $(this).attr('data-id');
+                $("#delete_qna_id").val(qnaId);
+            });
+
+            $("#deleteQna").submit(function(e) {
+                e.preventDefault();
+
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    url:"{{ route('deleteQna') }}",
+                    type:"GET",
+                    data:formData,
+                    success:function(data) {
+                        if (data.success == true) {
+                            location.reload();
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                });
+            });
         });
 
 

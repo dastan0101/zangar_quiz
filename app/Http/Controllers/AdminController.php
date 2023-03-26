@@ -7,6 +7,10 @@ use App\Models\Subject;
 use App\Models\Exam;
 use App\Models\Question;
 use App\Models\Answer;
+use App\Models\User;
+
+use App\Imports\QnaImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 use function GuzzleHttp\Promise\all;
 
@@ -206,5 +210,33 @@ class AdminController extends Controller {
         }
 
     }
+
+    public function deleteQna(Request $request) {
+        try {
+            Question::where('id', $request->qna_id)->delete();
+            Answer::where('question_id', $request->qna_id)->delete();
+            return response()->json(['success'=>true, 'msg'=>'Question and Answers deleted successfully!']);
+
+        } catch(\Exception $e) {
+            return response()->json(['success'=>false, 'msg'=>$e->getMessage()]);
+        }
+    }
+
+    public function importQna(Request $request) {
+        try {
+            Excel::import(new QnaImport, $request->file('file'));
+
+            return response()->json(['success'=>false, 'msg'=>'Import Q&A successfully!']);
+            
+        } catch (\Exception $e) {
+            return response()->json(['success'=>false, 'msg'=>$e->getMessage()]);
+        }
+    }
+
+    public function studentsDashboard() {
+        $students = User::where('is_admin', 0)->get();
+        return view('admin.students-dashboard', compact('students'));
+    }
+    
 }
  
