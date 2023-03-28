@@ -17,6 +17,7 @@
                 <th scope="col">Date</th>
                 <th scope="col">Time</th>
                 <th scope="col">Attempt</th>
+                <th scope="col">Add Questions</th>
                 <th scope="col">Edit</th>
                 <th scope="col">Delete</th>
             </tr>
@@ -31,6 +32,9 @@
                         <td>{{ $exam->date }}</td>
                         <td>{{ $exam->time }} hours</td>
                         <td>{{ $exam->attempt }} time</td>
+                        <td>
+                            <a class="btn btn-success" href="#" data-id="{{ $exam->id }}" data-toggle="modal" data-target="#addQnaModel">Add Question</a>
+                        </td>
                         <td>
                             <button class="btn btn-info editButton" 
                                     data-id="{{ $exam->id }}" 
@@ -170,6 +174,37 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Answer Modal -->
+    <div class="modal fade" id="addQnaModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addQnaTitle">Add Q&A</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="addQna">
+                @csrf
+                    <div class="modal-body">
+                        <input type="hidden" name="exam_id" id="addExamId">
+                        <br>
+                        <select name="questions" multiple multiselect-search="true" multiselect-select-all="true" onchange="console.log(this.selectedOptions)">
+                            <option value="">Select Questions</option>
+                            <option value="q1">q 1</option>
+                            <option value="q2">q 2</option>
+                            <option value="q3">q 3</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add Q&A</button>
                     </div>
                 </form>
             </div>
