@@ -8,8 +8,10 @@ use App\Models\Exam;
 use App\Models\Question;
 use App\Models\Answer;
 use App\Models\User;
+use App\Models\QnaExam;
 
 use App\Imports\QnaImport;
+
 use Maatwebsite\Excel\Facades\Excel;
 
 use Illuminate\Support\Facades\Hash;
@@ -306,6 +308,54 @@ class AdminController extends Controller {
         try {
             User::where('id', $request->id)->delete();
             return response()->json(['success'=>true, 'msg'=>"Student deleted succesfully!"]);
+
+        } catch(\Exception $e) {
+            return response()->json(['success'=>false, 'msg'=>$e->getMessage()]);
+        }
+    }
+
+    // get questions 
+    public function getQuestions(Request $request) {
+        try {
+
+            $questions = Question::all();
+
+            if (count($questions) > 0) {
+                $data = [];
+                $counter = 0;
+                foreach($questions as $question) {
+                    $qnaExam = QnaExam::where(['exam_id'=>$request->exam_id, 'question_id'=>$question->id])->get();
+                    if (count($qnaExam) == 0) {
+                        $data[$counter]['id'] = $question->id;
+                        $data[$counter]['questions'] = $question->question;
+                        $counter++;
+                    }
+                } 
+                return response()->json(['success'=>true, 'msg'=>'Question data!', 'data'=>$data]);
+            } else {
+                return response()->json(['success'=>false, 'msg'=>'Question not found!']);
+            }
+            
+        } catch(\Exception $e) {
+            return response()->json(['success'=>false, 'msg'=>$e->getMessage()]);
+        }
+    }
+
+    // add questions to exam
+    public function addQuestions(Request $request) {
+        try {
+            
+            if (isset($request->questions_ids)) {
+                
+                foreach ($request->questions_ids as $question_id) {
+                    QnaExam::insert([
+                        'exam_id' => $request->exam_id,
+                        'question_id' => $question_id,
+
+                    ]);
+                }
+            }
+            return response()->json(['success'=>true, 'msg'=>'Question added to exam successfully!']);
 
         } catch(\Exception $e) {
             return response()->json(['success'=>false, 'msg'=>$e->getMessage()]);

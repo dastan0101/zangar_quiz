@@ -33,7 +33,7 @@
                         <td>{{ $exam->time }} hours</td>
                         <td>{{ $exam->attempt }} time</td>
                         <td>
-                            <a class="btn btn-success" href="#" data-id="{{ $exam->id }}" data-toggle="modal" data-target="#addQnaModel">Add Question</a>
+                            <a class="btn btn-success addQuestion" href="#" data-id="{{ $exam->id }}" data-toggle="modal" data-target="#addQnaModel">Add Question</a>
                         </td>
                         <td>
                             <button class="btn btn-info editButton" 
@@ -75,14 +75,14 @@
                 @csrf
                     <div class="modal-body">
                         <label>Exam Name</label>
-                        <input type="text" name="exam_name" required placeholder="Enter Exam Name">
+                        <input type="text" name="exam_name" class="w-100" required placeholder="Enter Exam Name">
                         <br>
                         <label>Subject</label>
-                        <select name="subject_id" required>
+                        <select name="subject_id" class="w-100" required>
                             <option value="">Select Subject</option>
                             @if (count($subjects) > 0)
                                 @foreach ($subjects as $subject)
-                                    <option value="{{ $subject->id }}">{{ $subject->subject }}</option>
+                                    <option class="w-100" value="{{ $subject->id }}">{{ $subject->subject }}</option>
                                 @endforeach
                             @else
                                 
@@ -90,13 +90,13 @@
                         </select>
                         <br>
                         <label>Date</label>
-                        <input type="date" name="date" required min="@php echo date('Y-m-d'); @endphp">
+                        <input type="date" name="date" class="w-100" required min="@php echo date('Y-m-d'); @endphp">
                         <br>
                         <label>Time</label>
-                        <input type="time" name="time" required>
+                        <input type="time" name="time" class="w-100" required>
                         <br>
                         <label>Attempt</label>
-                        <input type="number" name="attempt" min="1" placeholder="Enter Exam Attempt Time" required>
+                        <input type="number" name="attempt" class="w-100" min="1" placeholder="Enter Exam Attempt Time" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -180,7 +180,7 @@
         </div>
     </div>
 
-    <!-- Add Answer Modal -->
+    <!-- Add Question & Answer Modal -->
     <div class="modal fade" id="addQnaModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -194,13 +194,17 @@
                 @csrf
                     <div class="modal-body">
                         <input type="hidden" name="exam_id" id="addExamId">
+                        <input type="search" name="search" class="w-100" placeholder="Search here">
                         <br>
-                        <select name="questions" multiple multiselect-search="true" multiselect-select-all="true" onchange="console.log(this.selectedOptions)">
-                            <option value="">Select Questions</option>
-                            <option value="q1">q 1</option>
-                            <option value="q2">q 2</option>
-                            <option value="q3">q 3</option>
-                        </select>
+                        <table class="table">
+                            <thead>
+                                <th>Select</th>
+                                <th>Question</th>
+                            </thead>
+                            <tbody class="addBody">
+                                
+                            </tbody>
+                        </table>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -303,6 +307,59 @@
                     }
                 })
             });
+
+            // add questions part
+            $('.addQuestion').click(function() {
+                var id = $(this).attr('data-id');
+                $('#addExamId').val(id);
+
+                $.ajax({
+                    url:"{{ route('getQuestions') }}",
+                    type:"GET",
+                    data:{exam_id:id},
+                    success:function(data) {
+                        if(data.success == true) {
+                            console.log(data);
+                            var questions = data.data;
+                            var html = '';
+                            if(questions.length > 0) {
+                                for (let i = 0; i < questions.length; i++) {
+                                    html += '<tr><td><input type="checkbox" value="'+
+                                        questions[i]['id']+
+                                        '" name="questions_ids[]"></td><td>'
+                                            +questions[i]['questions']+'</td></tr>';
+                                }
+                            } else {
+                                html += '<tr><td colspan="2">Questions not available!</td></tr>';
+                            }
+
+                            $('.addBody').html(html);
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                });
+            });
+
+            $("#addQna").submit(function(e) {
+                e.preventDefault();
+
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    url:"{{ route('addQuestions') }}",
+                    type:"POST",
+                    data:formData,
+                    success:function(data) {
+                        if (data.success == true) {
+                            location.reload();
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                })
+            });
+
         });
     </script>
 

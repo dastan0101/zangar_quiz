@@ -405,35 +405,35 @@
             });
 
             // import Q&A (excel and csv)
-            $("#importQna").submit(function(e) {
-                e.preventDefault();
+            // $("#importQna").submit(function(e) {
+            //     e.preventDefault();
 
-                let formData = new formData();
+            //     let formData = new formData();
 
-                formData.append('file', fileupload files[0]);
+            //     formData.append('file', fileupload files[0]);
 
-                $.ajaxSetup({
-                    headers:{
-                        "X-CSRF-TOKEN":"{{ csrf_token() }}"
-                    }
-                });
+            //     $.ajaxSetup({
+            //         headers:{
+            //             "X-CSRF-TOKEN":"{{ csrf_token() }}"
+            //         }
+            //     });
 
-                $.ajax({
-                    url:"{{ route('importQna') }}",
-                    type:"POST",
-                    data:formData,
-                    processData:false,
-                    contentType:false,
-                    success:function(data) {
-                        console.log(data);
-                        if (data.success == true) {
-                            // location.reload();
-                        } else {
-                            // alert(data.msg);
-                        }
-                    }
-                });
-            });
+            //     $.ajax({
+            //         url:"{{ route('importQna') }}",
+            //         type:"POST",
+            //         data:formData,
+            //         processData:false,
+            //         contentType:false,
+            //         success:function(data) {
+            //             console.log(data);
+            //             if (data.success == true) {
+            //                 // location.reload();
+            //             } else {
+            //                 // alert(data.msg);
+            //             }
+            //         }
+            //     });
+            // });
 
             // delete question and answer
             $(".deleteButton").click(function() {
