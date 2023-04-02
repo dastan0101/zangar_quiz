@@ -14,6 +14,8 @@
         body {
             background: url(/images/zangar.jpg); 
             background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
         .opacity {
             background-size: cover; 

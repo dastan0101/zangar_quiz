@@ -16,7 +16,7 @@ class ExamController extends Controller
 
                 if (count($qnaExam[0]['getQnaExam']) > 0) {
                     
-                    $qna = QnaExam::where('exam_id', $qnaExam[0]['id'])->with('question', 'answers')->get();
+                    $qna = QnaExam::where('exam_id', $qnaExam[0]['id'])->with('question', 'answers')->inRandomOrder()->get();
                     return view('student.exam-dashboard', ['success'=>true, 'exam'=>$qnaExam, 'qna'=>$qna]);
 
                 } else {
@@ -27,7 +27,7 @@ class ExamController extends Controller
             } elseif ($qnaExam[0]['date'] > date('Y-m-d')) {
                 return view('student.exam-dashboard', ['success'=>false, 'msg'=>'This exam will be start on '.$qnaExam[0]['date'], 'exam'=>$qnaExam]);
             } else {
-                return view('student.exam-dashboard', ['success'=>false, 'msg'=>'This exam will be expired on '.$qnaExam[0]['date'], 'exam'=>$qnaExam]);
+                return view('student.exam-dashboard', ['success'=>false, 'msg'=>'This exam expired on '.$qnaExam[0]['date'], 'exam'=>$qnaExam]);
             }
             
         } else {
