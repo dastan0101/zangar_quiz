@@ -18,7 +18,7 @@
                         <div>
                             <h5><b>{{ $counter++ }}. {{ $test['question'][0]['question'] }}</b></h5>
                             <input type="hidden" name="q[]" value="{{ $test['question'][0]['id'] }}">
-                            <input type="text" name="answer_{{ $counter-1 }}" id="answer_{{ $counter-1 }}">
+                            <input type="hidden" name="answer_{{ $counter-1 }}" id="answer_{{ $counter-1 }}">
                             @foreach ($test['question'][0]['answers'] as $answer)
                                 <p style="color: black">
                                     <input type="radio" name="radio_{{ $counter-1 }}" data-id="{{ $counter-1 }}" class="selected_answer" value="{{ $answer['id'] }}">
@@ -57,7 +57,7 @@
             
             for (let i = 1; i <= question_length; i++) {
                 if ($('#answer_'+i).val() == "") {
-                    result false;
+                    result = false;
 
                     $('#answer_'+i).parent().append('<span style="color: red;" class="error_msg">Please, select answer!</span>');
                     setTimeout(() => {
