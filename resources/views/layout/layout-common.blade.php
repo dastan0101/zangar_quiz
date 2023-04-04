@@ -19,17 +19,12 @@
         }
         .opacity {
             background-size: cover; 
-            background-color:rgba(253, 253, 253, 0.5);
-            height: 100vh;
+            background-color:rgba(253, 253, 253, 0.8);
         }
     </style>
 </head>
 <body>
-    <div class="opacity">
-        @yield('space-work')
-    </div>
-    
-
+    @yield('space-work')
 
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
