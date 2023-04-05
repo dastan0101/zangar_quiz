@@ -154,7 +154,7 @@ class AdminController extends Controller {
             return response()->json(['success'=>false, 'msg'=>$e->getMessage()]);
         }
     }
-    public function getQnaDetails(Request $request) {
+    public function getQnaExamDetails(Request $request) {
         $qna = Question::where('id', $request->questionId)->with('answers')->get();
         return response()->json(['data'=>$qna]);
     }
@@ -386,6 +386,14 @@ class AdminController extends Controller {
         } catch(\Exception $e) {
             return response()->json(['success'=>false, 'msg'=>$e->getMessage()]);
         }
+    }
+
+    // add marks
+    public function marksDashboard() {
+
+        $exams = Exam::with('getQnaExam')->get();
+
+        return view('admin.marks-dashboard', compact('exams'));
     }
 }
  
