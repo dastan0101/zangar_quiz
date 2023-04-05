@@ -9,12 +9,13 @@
     <div class="container opacity">
         <h1 style="color: black;">Welcome, <b>{{ Auth::user()->name }}</b></h1>
         <h1 class="text-center">{{ $exam[0]['exam_name'] }}</h1>
-        <h4 class="text-right time">{{ $exam[0]['time'] }}</h4>
         @php $counter = 1; @endphp
 
         @if ($success == true)
 
             @if (count($qna) > 0)
+                <h4 class="text-right time">{{ $exam[0]['time'] }}</h4>
+
                 <form action="{{ route('examSubmit') }}" method="POST" id="exam_form" class="mb-5" onsubmit="return isValid()">
                     @csrf
                     <input type="hidden" name="exam_id" value="{{ $exam[0]['id'] }}">
@@ -70,7 +71,7 @@
 
                 if (seconds <= 0) {
                     minutes--;
-                    seconds = 10;
+                    seconds = 59;
                 }
 
                 if (minutes <= 0 && hours != 0) {

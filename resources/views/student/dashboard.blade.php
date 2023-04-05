@@ -22,12 +22,14 @@
                 @endphp
                 @foreach ($exams as $exam)
                     <tr>
+                        <td style="display: none;">{{ $exam->id }}</td>
                         <td>{{ $count++ }}</td>
                         <td>{{ $exam->exam_name }}</td>
                         <td>{{ $exam->subjects[0]['subject'] }}</td>
                         <td>{{ $exam->date }}</td>
                         <td>{{ $exam->time }}</td>
                         <td>{{ $exam->attempt }}</td>
+                        <td>{{ $exam->attempt_counter }}</td>
                         <td></td>
                         <td><a href="#" data-code="{{ $exam->enterance_id }}" class="copy">Copy <i class="fa fa-copy"></i></a></td>
                     </tr>
