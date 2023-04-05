@@ -15,7 +15,7 @@
         @if ($success == true)
 
             @if (count($qna) > 0)
-                <form action="{{ route('examSubmit') }}" method="POST" class="mb-5" onsubmit="return isValid()">
+                <form action="{{ route('examSubmit') }}" method="POST" id="exam_form" class="mb-5" onsubmit="return isValid()">
                     @csrf
                     <input type="hidden" name="exam_id" value="{{ $exam[0]['id'] }}">
                     
@@ -56,22 +56,29 @@
             var time = @json($time);
             $('.time').text(time[0] + ':' + time[1] + ':00');
 
-            var seconds = 60;
-            var minutes = time[1];
-            var hours = time[0];
+            var seconds = 0;
+            var minutes = parseInt(time[1]);
+            var hours = parseInt(time[0]);
             
-            setInterval(() => {
+            var timer = setInterval(() => {
                 
+                if (hours == 0 && minutes == 0 && seconds == 0) {
+                    clearInterval(timer);
+                    $('#exam_form').submit();
+                }
+                // console.log(hours + ":" + minutes + ":" + seconds);
+
                 if (seconds <= 0) {
                     minutes--;
-                    seconds = 60;
+                    seconds = 10;
                 }
 
-                if (minutes <= 0) {
+                if (minutes <= 0 && hours != 0) {
                     hours--;
                     minutes = 59;
-                    seconds = 60;
+                    seconds = 59;
                 }
+                
 
                 let tempHours = hours.toString().length > 1? hours: '0' + hours;
                 let tempMinutes = minutes.toString().length > 1? minutes: '0' + minutes;

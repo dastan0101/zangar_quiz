@@ -51,13 +51,15 @@ class ExamController extends Controller
         if ($count > 0) {
             
             for ($i=0; $i < $count; $i++) { 
-                ExamAnswer::insert([
-                    'attempt_id' => $attempt_id,
-                    'question_id' => $request->q[$i],
-                    'answer_id' => request()->input('answer_'.($i+1))
-                ]);
+                if (!empty(request()->input('answer_'.($i+1)))) {
+                    ExamAnswer::insert([
+                        'attempt_id' => $attempt_id,
+                        'question_id' => $request->q[$i],
+                        'answer_id' => request()->input('answer_'.($i+1))
+                    ]);
+                }
+                
             }
-
 
         }
 
