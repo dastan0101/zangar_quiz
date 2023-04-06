@@ -77,6 +77,7 @@ Route::group(['middleware'=>['web', 'checkAdmin']], function(){
 
     // marks 
     Route::get('/admin/marks', [AdminController::class, 'marksDashboard']);
+    Route::post('/edit-marks', [AdminController::class, 'editMarks'])->name('editMarks');
 
 });
 

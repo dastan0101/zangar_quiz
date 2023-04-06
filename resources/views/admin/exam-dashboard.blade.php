@@ -312,7 +312,7 @@
                             alert(data.msg);
                         }
                     }
-                })
+                });
             });
 
             // delete subject

@@ -395,5 +395,22 @@ class AdminController extends Controller {
 
         return view('admin.marks-dashboard', compact('exams'));
     }
+
+    // edit marks
+    public function editMarks(Request $request) {
+
+        try {
+            
+            Exam::where('id', $request->exam_id)->update([
+                'marks' => $request->marks
+            ]);
+
+            return response()->json(['success'=>true, 'msg'=>'Marks edited successfully!']);
+
+        } catch(\Exception $e) {
+            return response()->json(['success'=>false, 'msg'=>$e->getMessage()]);
+        }
+
+    }
 }
  
