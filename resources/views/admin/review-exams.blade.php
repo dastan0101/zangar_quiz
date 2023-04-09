@@ -33,7 +33,7 @@
                         </td>
                         <td>
                             @if ($attempt->status == 0)
-                                <a href="#" class="reviewExam" data-id="{{ $attempt->exam->id }}" data-toggle="modal" data-target="#reviewExamModal">Review & Approved</a>
+                                <a href="#" class="reviewExam" data-id="{{ $attempt->id }}" data-toggle="modal" data-target="#reviewExamModal">Review & Approved</a>
                             @else
                                 Completed
                             @endif
@@ -73,5 +73,57 @@
         </div>
         </div>
     </div>
+
+
+
+    <script>
+
+        $(document).ready(function() {
+
+            $('.reviewExam').click(function() {
+                
+                var id = $(this).attr('data-id');
+
+                $.ajax({
+                    url:"{{ route('reviewQna') }}",
+                    type:"GET",
+                    data:{attempt_id: id},
+                    success:function(data) {
+
+                        var html = '';
+                        
+                        if (data.success == true) {
+                            
+                            var data = data.data;
+                            
+                            if (data.length > 0) {
+                                for (let i = 1; i < data.length; i++) {
+
+                                    let isCorrect = '<span style="color:red" class="fa fa-close"></span>';
+
+                                    if (data[i]['answers']['is_correct'] == 1) {
+                                        isCorrect = '<span style="color:green" class="fa fa-check"></span>';
+                                    }
+
+                                    let answer = data[i]['answers']['answer'];
+
+                                    html += '<div class="row"><div class="col-sm-12"><h6>Q('+(i+1)+'). '+data[i]['question']['question']+'</h6></div></div><p>Answer:-'+answer+'  '+isCorrect+'</p>';
+                                }
+
+                            } else {
+                                html += '<h6>Student not attempt any Questions</h6> <p>If you Approve this Exam Student will faill</p>';
+                            }
+
+                        } else {
+                            html += '<p>Having some server issue!</p>';
+                        }
+                        $('.review-exam').html(html);
+                    }
+                });
+            });
+
+        });
+
+    </script>
 
 @endsection
