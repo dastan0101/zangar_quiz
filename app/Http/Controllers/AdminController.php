@@ -11,7 +11,7 @@ use App\Models\User;
 use App\Models\QnaExam;
 
 use App\Imports\QnaImport;
-
+use App\Models\ExamAttempt;
 use Maatwebsite\Excel\Facades\Excel;
 
 use Illuminate\Support\Facades\Hash;
@@ -411,6 +411,13 @@ class AdminController extends Controller {
             return response()->json(['success'=>false, 'msg'=>$e->getMessage()]);
         }
 
+    }
+
+    // load review exams page
+    public function reviewExams() {
+
+        $attempts = ExamAttempt::with(['user', 'exam'])->orderBy('id')->get();
+        return view('admin.review-exams', compact('attempts'));
     }
 }
  
