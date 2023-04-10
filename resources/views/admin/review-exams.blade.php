@@ -61,6 +61,8 @@
             </button>
             </div>
             <form action="" id="reviewForm">
+                @csrf
+                <input type="hidden" name="attempt_id" id="attempt_id">
                 <div class="modal-body review-exam">
                     Loading...
                 </div>
@@ -83,6 +85,7 @@
             $('.reviewExam').click(function() {
                 
                 var id = $(this).attr('data-id');
+                $('#attempt_id').val(id);
 
                 $.ajax({
                     url:"{{ route('reviewQna') }}",
@@ -122,6 +125,25 @@
                 });
             });
 
+            // approved exam
+            $('#reviewForm').submit(function(event) {
+                event.preventDefault();
+
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    url:"{{ route('approvedQna') }}",
+                    type:"POST",
+                    data:formData,
+                    success:function(data) {
+                        if (data.success == true) {
+                            location.reload();
+                        } else {
+                            alert(data.msg);
+                        }
+                    }
+                });
+            });
         });
 
     </script>
