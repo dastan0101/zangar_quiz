@@ -9,19 +9,15 @@
 		
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Biryani:wght@200;600&family=Roboto:wght@700&display=swap" rel="stylesheet">
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <style>
-        body {
-            background: url(/images/zangar.jpg); 
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-        .opacity {
-            background-size: cover; 
-            background-color:rgba(253, 253, 253, 0.8);
-        }
-    </style>
+
 </head>
 <body>
     @yield('space-work')
