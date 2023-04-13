@@ -30,7 +30,6 @@
                         <td>{{ $exam->time }}</td>
                         <td>{{ $exam->attempt }}</td>
                         <td>{{ $exam->attempt_counter }}</td>
-                        <td></td>
                         <td><a href="#" data-code="{{ $exam->enterance_id }}" class="copy">Copy <i class="fa fa-copy"></i></a></td>
                     </tr>
                 @endforeach

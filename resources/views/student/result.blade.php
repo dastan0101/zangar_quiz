@@ -1,18 +1,19 @@
-@extends('layout/admin-layout')
+@extends('layout/student-layout')
 
 @section('space-work')
-
-    <h2>Student Exams</h2>
     
-    {{-- Table --}}
+    <h2>Results</h2>
+
     <table class="table">
         <thead>
-            <th>#</th>
-            <th>Name</th>
-            <th>Exam</th>
-            <th>Status</th>
-            <th>Review</th>
+            <tr>
+                <td>#</td>
+                <td>Exam</td>
+                <td>Result</td>
+                <td>Status</td>
+            </tr>
         </thead>
+
         <tbody>
             
             @if (count($attempts) > 0)
@@ -22,20 +23,27 @@
                 @foreach ($attempts as $attempt)
                     <tr>
                         <td>{{ $i++ }}</td>
-                        <td>{{ $attempt->user->name ?? "" }}</td>
                         <td>{{ $attempt->exam->exam_name }}</td>
                         <td>
-                            @if ($attempt->status == 0)
-                                <span style="color:red">Pending</span>
+                            @if ($attempt->status == 1)
+                                <b>{{ $attempt->marks }}</b> / 
+                                
+                                @if ($attempt->marks >= $attempt->exam->pass_marks)
+                                    <span style="color:green">Passed</span>
+                                @else
+                                    <span style="color:red">Failed</span>
+                                @endif
+                                
                             @else
-                                <span style="color:green">Approved</span>
+                                Not Announced
                             @endif
+                            
                         </td>
                         <td>
-                            @if ($attempt->status == 0)
-                                <a href="#" class="reviewExam" data-id="{{ $attempt->id }}" data-toggle="modal" data-target="#reviewExamModal">Review & Approved</a>
+                            @if ($attempt->status == 1)
+                                <a href="#" data-id="{{ $attempt->id }}" class="reviewExam" data-toggle="modal" data-target="#reviewQnaModal">Review Q&A</a>
                             @else
-                                Completed
+                                <span style="color:red">Pending</span>
                             @endif
                         </td>
                     </tr>
@@ -43,15 +51,16 @@
 
             @else
                 <tr>
-                    <td colspan="5">The students have not passed the exams yet</td>
+                    <td colspan="4">You haven't taken any exams yet</td>
                 </tr>
             @endif
 
         </tbody>
     </table>
-
+    
+    
     <!-- Modal -->
-    <div class="modal fade" id="reviewExamModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="reviewQnaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -60,45 +69,34 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
-            <form action="" id="reviewForm">
-                @csrf
-                <input type="hidden" name="attempt_id" id="attempt_id">
-                <div class="modal-body review-exam">
+                <div class="modal-body review-qna">
                     Loading...
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary approved-btn">Approved</button>
-            </form>
-            
             </div>
         </div>
         </div>
     </div>
 
-
-
     <script>
 
         $(document).ready(function() {
-
+            
             $('.reviewExam').click(function() {
-                
+
                 var id = $(this).attr('data-id');
-                $('#attempt_id').val(id);
 
                 $.ajax({
-                    url:"{{ route('reviewQna') }}",
+                    url:"{{ route('reviewStudentQna') }}",
                     type:"GET",
                     data:{attempt_id: id},
                     success:function(data) {
-
                         var html = '';
-                        
+
                         if (data.success == true) {
                             
                             var data = data.data;
-                            
                             if (data.length > 0) {
                                 for (let i = 0; i < data.length; i++) {
 
@@ -112,42 +110,20 @@
 
                                     html += '<div class="row"><div class="col-sm-12"><h6>Q('+(i+1)+'). '+data[i]['question']['question']+'</h6></div></div><p>Answer:-'+answer+'  '+isCorrect+'</p>';
                                 }
-
                             } else {
-                                html += '<h6>Student not attempt any Questions</h6> <p>If you Approve this Exam Student will faill</p>';
+                                html += '<h6>You didn\'t attempt any Questions.</h6>';
                             }
 
                         } else {
-                            html += '<p>Having some server issue!</p>';
+                            html += '<p>There was some kind of problem on the server side.</p>';
                         }
-                        $('.review-exam').html(html);
+
+                        $('.review-qna').html(html);
                     }
                 });
             });
-
-            // approved exam
-            $('#reviewForm').submit(function(event) {
-                event.preventDefault();
-
-                $('.approved-btn').html('Please Wait <i class="fa fa-spinner fa-spin"></i>')
-
-                var formData = $(this).serialize();
-
-                $.ajax({
-                    url:"{{ route('approvedQna') }}",
-                    type:"POST",
-                    data:formData,
-                    success:function(data) {
-                        if (data.success == true) {
-                            location.reload();
-                        } else {
-                            alert(data.msg);
-                        }
-                    }
-                });
-            });
+            
         });
 
     </script>
-
 @endsection

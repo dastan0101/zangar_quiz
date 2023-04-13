@@ -452,7 +452,7 @@ class AdminController extends Controller {
                 
                 foreach ($attemptData as $attempt) {
                     
-                    if ($attempt->answers->is_correct = 1) {
+                    if ($attempt->answers->is_correct == 1) {
                         $totalMarks += $examMarks;
                     }
 
