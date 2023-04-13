@@ -74,6 +74,11 @@
                                 <input type="text" class="w-100" name="question" placeholder="Enter Question" required>
                             </div>
                         </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <textarea type="text" class="w-100" name="explanation" placeholder="Enter Explanation"></textarea>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <p class="error" style="color:red"></p>
@@ -106,6 +111,11 @@
                             <div class="col">
                                 <input type="hidden" name="question_id" id="question_id">
                                 <input type="text" class="w-100" id="question" name="question" placeholder="Enter Question" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <textarea class="w-100" name="explanation" id="explanation" placeholder="Enter Explanation"></textarea>
                             </div>
                         </div>
                     </div>
@@ -312,7 +322,7 @@
                 var questionId = $(this).attr('data-id');
 
                 $.ajax({
-                    url:"{{ route('getQnaDetails') }}",
+                    url:"{{ route('getQnaExamDetails') }}",
                     type:"GET",
                     data:{questionId:questionId},
                     success:function(data) {
@@ -320,6 +330,7 @@
                         var qna = data.data[0];
                         $("#question_id").val(qna['id']);
                         $("#question").val(qna['question']);
+                        $("#explanation").val(qna['explanation']);
                         $(".editAnswers").remove();
 
                         var html = '';

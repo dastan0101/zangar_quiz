@@ -57,7 +57,7 @@ Route::group(['middleware'=>['web', 'checkAdmin']], function(){
     // question and answer
     Route::get('/admin/question-answer', [AdminController::class, 'questionAnswerDashboard']);
     Route::post('/add-question-answer', [AdminController::class, 'addQna'])->name('addQna');
-    Route::get('/get-question-answer-details', [AdminController::class, 'getQnaDetails'])->name('getQnaDetails');
+    Route::get('/get-question-answer-details', [AdminController::class, 'getQnaExamDetails'])->name('getQnaExamDetails');
     Route::get('/delete-answer', [AdminController::class, 'deleteAnswer'])->name('deleteAnswer');
     Route::post('/edit-question-answer', [AdminController::class, 'editQna'])->name('editQna');
     Route::get('/delete-question-answer', [AdminController::class, 'deleteQna'])->name('deleteQna');
