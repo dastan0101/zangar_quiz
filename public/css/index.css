@@ -1,0 +1,565 @@
+:root {
+    /* FOR BRIGHT MODE */
+    --bg-color: #ffffff;
+    --nav-text-color: #111;
+    --text-family: Calibri;
+    --brand-color-1: #F2AE26;
+    --brand-color-2: #1FA499;
+    --footer-bg-color: #353535;
+    --footer-text-color: #CDCDCD;
+}
+
+body.dark {
+     /* FOR DARK MODE */
+    --bg-color: #111111;
+    --nav-text-color: #fff;
+    --brand-color-2: #F2AE26;
+    --brand-color-1: #1FA499;
+
+    transition: 0.5s;
+}
+
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    transition: 0.5s;
+}
+h1, h2, h3, h4, h5, p, a {
+    font-family: var(--text-family);
+    color: var(--nav-text-color);
+}
+
+h1 {
+    font-size: 48px;
+}
+
+h2 {
+    font-size: 36px;
+}
+
+h3 {
+    font-size: 24px;
+}
+h4 {
+    font-size: 20px;
+}
+p {
+    font-size: 16px;
+}
+body {
+    background: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    transition: 0.5s;
+    width: 100%;
+}
+
+.page {
+    max-width: 90%;
+}
+
+header {
+    display: flex;
+    justify-content: left;
+    margin-top: 50px;
+}
+
+
+header nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mobile {
+    display: none;
+    width: 100%;
+}
+
+.mobile-nav, #title {
+    display: none;
+}
+
+header nav ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+header nav ul li, .mobile li {
+    list-style-type: none;
+    margin: 0 20px 0  0;
+}
+
+header nav ul li a, .mobile-quiz a {
+    position: relative;
+    text-decoration: none;
+    font-family: var(--text-family);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--nav-text-color);
+}
+
+header nav ul li a span{
+    color: var(--brand-color-2);
+}
+
+header nav ul li.menu a::after {
+    content: "";
+    position: absolute;
+    background-color: var(--brand-color-2);
+    height: 3px;
+    width: 0px;
+    left: 0;
+    bottom: 0;
+}
+
+header nav ul li.menu a:hover::after {
+    width: 50%;
+    transition: 0.5s;
+}
+
+header nav ul li.active a{
+    color: var(--brand-color-2);
+    height: 3px;
+    transition: none;
+}
+
+header nav ul li.active a::before{
+    content: "";
+    position: absolute;
+    background-color: var(--brand-color-2);
+    height: 3px;
+    width: 50%;
+    left: 0;
+    bottom: 0;
+}
+
+header nav ul.right-side li {
+    margin: 0px 20px 0 0px;
+}
+
+
+#brand {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--brand-color-1);
+    margin-right: 70px;
+}
+
+.toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 44px;
+    height: 19px;
+    background-color: var(--brand-color-2);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.toggle::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    transform: scale(0.8);
+    background-color: var(--bg-color);
+    transition: 0.5s;
+}
+
+body.dark .toggle::before {
+    left: 25px;
+}
+
+.toggle i {
+    margin: 3px 3px 0px;
+    color: var(--bg-color);
+}
+
+header nav ul li.quiz, .mobile-quiz {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 115px;
+    height: 43px;
+    border-radius: 42px;
+    font-size: 22px;
+    background: var(--brand-color-1);
+    box-shadow: 0 0px 100px 10px var(--brand-color-1);
+}
+.mobile-quiz {
+    display: none;
+}
+.fa-bars {
+    display: none;
+}
+
+main {
+    width: 100%;
+}
+
+main div.home {
+    display: flex;
+    justify-content: space-between;
+}
+
+main div.home div.info{
+    margin-top: 200px;
+    display: block;
+    width: 55%;
+}
+
+main div.home div.info h1{
+    width: 500px;
+    white-space: wrap;
+    font-size: 48px;
+    font-family: 'Kadwa';
+    color: var(--brand-color-1);
+}
+
+main div.home div.info h1 span{
+    color: var(--nav-text-color);
+}
+
+p{
+    margin-top: 30px;
+    font-family: var(--text-family);
+    color: var(--nav-text-color);
+    word-wrap: break-word;
+}
+
+main div.home div.info button, .more {
+    margin-top: 50px;
+    width: 180px;
+    height: 65px;
+    border-radius: 33px;
+    background: var(--brand-color-2);
+    border: none;
+    color: var(--bg-color);
+    font-family: 'Calibri';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 0px 100px 1px var(--brand-color-2);
+}
+
+main div div.student {
+    width: 100%;
+    position: relative;
+}
+
+main div div.student img {
+    width: 100%;
+}
+
+.part_1 {
+    margin: 50px 0px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+div.card {
+    width: 279px;
+    height: 318px;
+    box-shadow: 8px 8px 84px -19px var(--nav-text-color);
+    border-radius: 16px;
+    padding: 20px;
+    position: relative;
+}
+
+div.card i {
+    color: var(--brand-color-2);
+}
+
+div.card h3 {
+    margin-top: 40px;
+    font-family: var(--text-family);
+    color: var(--nav-text-color);
+}
+
+div.card .fa-circle-arrow-right {
+    position: absolute;
+    right: 20px;
+    bottom: 30px;
+    color: var(--brand-color-1);
+}
+
+.part_1 div h2 {
+    letter-spacing: 0.05em;
+ }
+ 
+.part_1 div h2 span {
+   color: var(--brand-color-1);
+}
+
+.more {
+    width: 100px;
+    height: 40px;
+    font-size: 12px;
+}
+
+.courses {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+div.course_card {
+    width: 330px;
+    height: 410px;
+    box-shadow: 8px 8px 84px -19px var(--nav-text-color);
+    border-radius: 16px;
+    position: relative;
+}
+
+div.courses div.course_card img {
+    border-radius: 16px 16px 0px 0px;
+    height: 175px;
+    width: 100%;
+}
+
+div.courses div.course_info {
+    margin: 20px;
+}
+
+div.courses div.course_info h5 {
+    margin-bottom: 10px;
+}
+
+.title_info {
+    display: block;
+    margin: 100px 0px 50px;
+    width: 100%;
+}
+
+.title {
+    width: fit-content;
+    border-bottom: solid 3px var(--brand-color-2);
+}
+
+.start_button {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 105px;
+    height: 30px;
+    color: var(--bg-color);
+    background-color: var(--brand-color-1);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 3px 4px 13px var(--brand-color-1);
+}
+
+main div.about {
+    margin-top: 100px;
+}
+
+main div.about div.about_school {
+    display: flex;
+    justify-content: space-between;
+}
+
+main div.about div.about_school img {
+    width: 560px;
+    height: 560px;
+}
+
+main div.about div.about_school div {
+    width: 600px;
+    padding-bottom: 100px;
+}
+
+footer {
+    display: grid;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--footer-bg-color);
+}
+
+footer h2, footer p, .visitka i, footer i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--footer-text-color);
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+footer div.contact div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+
+footer div.contact div div.visitka {
+    width: 290px;
+    height: 140px;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+.map iframe {
+    width: 600px;
+    height: 200px;
+}
+
+.map_mail, .fa {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    vertical-align: top;  
+}
+
+.map_mail .mail {
+    display: block;
+    justify-content: center;
+    width: 440px;
+    height: 250px;
+    padding-top: 50px;
+}
+
+.map_mail .mail input {
+    background-color: #565656;
+    margin: auto;
+    width: 420px;
+    height: 30px;
+    margin-bottom: 10px;
+    color: var(--footer-text-color);
+    border: none;
+    padding: 1px 3px 1px;
+}
+
+#div1 input {
+    width: 200px;
+    height: 30px;  
+}
+
+#message {
+    height: 100px;
+}
+
+#button {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+    
+}
+
+.fa i {
+    margin: 0 20px 0;
+}
+
+.fa i:hover {
+    color: var(--bg-color);
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+@media (max-width: 600px) {
+nav.desktop {
+    display: none;
+}
+nav.mobile-nav {
+    display: none;
+}
+nav.mobile-nav ul {
+    display: block;
+}
+.mobile {
+    display: flex;
+    justify-content: space-between;
+}
+main div.home {
+    flex-wrap: wrap-reverse;
+}
+main div.home div.info {
+    margin-top: 0px;
+    width: 100%;
+}
+main div div.student {
+    width: 90%;
+    margin: 0 auto;
+}
+main div div.student img {
+    width: 100%;
+    height: auto;
+}
+main div.home div.info h1, div.info p {
+    width: 100%;
+    text-align: center;
+}
+.courses {
+    margin-top: 50px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+}
+
+main div.home div.info button, .more {
+    margin-top: 0;
+}
+
+.mobile-quiz {
+    display: flex;
+    width: 180px;
+    height: 65px;
+}
+
+.part_1 {
+    margin: 100px 0 0 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+.futures {
+    display: none;
+}
+
+.title_info {
+    background: var(--brand-color-2);
+    display: grid;
+    flex-direction: column;
+    justify-content: center;
+    margin: 100px 0px 50px;
+    width: 100%;
+    text-align: center;
+}
+
+#title {
+    display: grid;
+}
+
+.title_info p, .title_info h2 {
+    color: var(--bg-color);
+}
+
+main div.about div.about_school {
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#hide {
+    display: none;
+}
+main div.about div.about_school img{
+    justify-content: center;
+    width: 100%;
+}
+
+main div.about div.about_school h2.title {
+    display: none;
+}
+
+footer {
+   
+}
+}

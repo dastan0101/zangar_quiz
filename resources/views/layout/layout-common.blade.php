@@ -18,6 +18,19 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
+    <style>
+        body {
+            background: url(/images/zangar.jpg); 
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .opacity {
+            background-size: cover; 
+            background-color:rgba(253, 253, 253, 0.8);
+        }
+    </style>
+
 </head>
 <body>
     @yield('space-work')

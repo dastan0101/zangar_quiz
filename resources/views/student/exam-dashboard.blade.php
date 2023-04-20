@@ -1,4 +1,4 @@
-@extends('layout/layout-common')
+@extends('layout/student-layout')
 
 @section('space-work')
 
@@ -7,7 +7,7 @@
     @endphp
 
     <div class="container opacity">
-        <h1 style="color: black;">Welcome, <b>{{ Auth::user()->name }}</b></h1>
+        <h3 style="color: black;">Welcome, <b>{{ Auth::user()->name }}</b></h3>
         <h1 class="text-center">{{ $exam[0]['exam_name'] }}</h1>
         @php $counter = 1; @endphp
 

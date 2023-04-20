@@ -17,7 +17,7 @@ use App\Http\Controllers\ExamController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 
@@ -28,8 +28,8 @@ Route::get('/login', function () {
     return redirect('/');
 });
 
-Route::get('/', [AuthController::class, 'loadLogin']);
-Route::get('/login', [AuthController::class, 'userLogin'])->name('userLogin');
+Route::get('/login', [AuthController::class, 'loadLogin']);
+Route::get('/user-login', [AuthController::class, 'userLogin'])->name('userLogin');
 
 Route::get('/logout', [AuthController::class, 'logout']);
 
