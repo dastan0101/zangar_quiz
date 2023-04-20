@@ -1,19 +1,21 @@
 @extends('layout/layout-common')
 
 @section('space-work')
+    <div class="opacity">
+        <div class="word">
+            <div class="welcome">
+                <h3>Welcome to the</h3>
+                <h1>Zangar <span>Quiz</span></h1>
+                <h6>You are required to attach an email address and password to the "login" before entering the quiz</h6>
+            </div>
+            <div class="buttons">
+                <button>LEARN MORE</button>
+                <img src="{{ asset('images/play.svg') }}" alt="">
+            </div>
+        </div>
 
-    <div class="word">
-        <div class="welcome">
-            <h3>Welcome to the</h3>
-            <h1>Zangar <span>Quiz</span></h1>
-            <h6>You are required to attach an email address and password to the "login" before entering the quiz</h6>
-        </div>
-        <div class="buttons">
-            <button>LEARN MORE</button>
-            <img src="{{ asset('images/play.svg') }}" alt="">
-        </div>
     </div>
-
+    
 
     <div class="login">
             <img src="{{ asset('images/logo.png') }}" alt="">

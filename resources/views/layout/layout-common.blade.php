@@ -25,10 +25,7 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
         }
-        .opacity {
-            background-size: cover; 
-            background-color:rgba(253, 253, 253, 0.8);
-        }
+        
     </style>
 
 </head>

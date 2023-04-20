@@ -3,22 +3,31 @@
   padding: 0;
 }
 body{
-  background-image: url(/images/background.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
   display: flex;
   flex-direction: row;
 }
-h1, h2, h3, h5, h6, p {
+.word h1, h2, h3, h5, h6, p {
   font-family: 'Biryani';
   word-wrap: break-word;
   color: white;
 }
+.welcome h1 {
+  color: #E9A825;
+}
+
+.welcome h1 span {
+  color: #1FA197;
+}
+
+.opacity {
+  background-size: cover; 
+  background-color:rgba(39, 35, 35, 0.8);
+  width: 65%;
+}
+
 .login{
   width: 35%;
   height: 100vh;
-  padding: 10% 3% 10% 3%;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -28,6 +37,15 @@ h1, h2, h3, h5, h6, p {
 .login img {
   width: 30%;
 }
+
+.login form {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 #wordLogin{
   margin-top: 40px;
   color: #1FA197;
