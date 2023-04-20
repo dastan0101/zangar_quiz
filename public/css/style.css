@@ -481,6 +481,9 @@ pre {
   margin-right: -15px;
   margin-left: -15px; }
 
+  .row input {
+    /* to do */
+  }
 .no-gutters {
   margin-right: 0;
   margin-left: 0; }
@@ -507,6 +510,12 @@ pre {
   -ms-flex-positive: 1;
   flex-grow: 1;
   max-width: 100%; }
+
+  .col input {
+    border: none;
+    border-bottom: 1px solid #1FA499;
+    outline: none;
+  }
 
 .col-auto {
   -webkit-box-flex: 0;
@@ -4804,6 +4813,7 @@ a.close.disabled {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  background: #F2AE26;
   -webkit-box-align: start;
   -ms-flex-align: start;
   align-items: flex-start;
@@ -4815,12 +4825,19 @@ a.close.disabled {
   border-top-left-radius: 0.3rem;
   border-top-right-radius: 0.3rem; }
   .modal-header .close {
+    color: white;
     padding: 1rem 1rem;
     margin: -1rem -1rem -1rem auto; }
 
+    .modal-header .close span {
+      font-size: 2rem;
+    }
+
 .modal-title {
   margin-bottom: 0;
-  line-height: 1.5; }
+  line-height: 1.5;
+  color: white;
+}
 
 .modal-body {
   position: relative;
@@ -4833,6 +4850,7 @@ a.close.disabled {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  background: #1FA499;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -8194,7 +8212,7 @@ h1, h2, h3, h4, h5,
 #sidebar {
   min-width: 250px;
   max-width: 250px;
-  background: #212121;
+  background: #1FA499;
   color: #fff;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
@@ -8214,7 +8232,7 @@ h1, h2, h3, h4, h5,
       color: #fff;
       display: block;
       padding: 10px 30px;
-      background: #2f89fc; }
+      background: #F2AE26; }
   #sidebar ul.components {
     padding: 0; }
   #sidebar ul li {
@@ -8230,14 +8248,14 @@ h1, h2, h3, h4, h5,
       border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
       #sidebar ul li a:hover {
         color: #fff;
-        background: #2f89fc;
-        border-bottom: 1px solid #2f89fc; }
+        background: #F2AE26;
+        border-bottom: 1px solid #F2AE26; }
     #sidebar ul li.active > a {
       background: transparent;
       color: #fff; }
       #sidebar ul li.active > a:hover {
-        background: #2f89fc;
-        border-bottom: 1px solid #2f89fc; }
+        background: #F2AE26;
+        border-bottom: 1px solid #F2AE26; }
   @media (max-width: 991.98px) {
     #sidebar {
       margin-left: -250px; }
@@ -8295,11 +8313,11 @@ a[data-toggle="collapse"] {
   transition: all 0.3s; }
 
 .btn.btn-primary {
-  background: #2f89fc;
-  border-color: #2f89fc; }
+  background: #F2AE26;
+  border-color: #F2AE26; }
   .btn.btn-primary:hover, .btn.btn-primary:focus {
-    background: #2f89fc !important;
-    border-color: #2f89fc !important; }
+    background: #F2AE26 !important;
+    border-color: #F2AE26 !important; }
 
 .footer p {
   color: rgba(255, 255, 255, 0.5); }
