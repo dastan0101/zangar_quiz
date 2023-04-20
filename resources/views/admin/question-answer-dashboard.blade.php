@@ -60,7 +60,6 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="addExamTitle">Add Q&A</h5>
 
-                    <button id="addAnswer" class="ml-5 btn btn-info">Add Answer</button>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -80,6 +79,9 @@
                             </div>
                         </div>
                     </div>
+
+                    <button id="addAnswer" class="ml-5 btn btn-info">Add Answer</button>
+
                     <div class="modal-footer">
                         <p class="error" style="color:red"></p>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -97,8 +99,6 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addExamTitle">Edit Q&A</h5>
-
-                    <button id="addEditAnswer" class="ml-5 btn btn-info">Add Answer</button>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -119,6 +119,9 @@
                             </div>
                         </div>
                     </div>
+
+                    <button id="addEditAnswer" class="ml-5 btn btn-info">Add Answer</button>
+
                     <div class="modal-footer">
                         <p class="editError" style="color:red"></p>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

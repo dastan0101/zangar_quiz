@@ -26,7 +26,7 @@
                         <td>{{ $attempt->exam->exam_name }}</td>
                         <td>
                             @if ($attempt->status == 1)
-                                <b>{{ $attempt->marks }}</b> / 
+                                <b>{{ $attempt->marks }} / {{ $attempt->exam->pass_marks }}</b> | 
                                 
                                 @if ($attempt->marks >= $attempt->exam->pass_marks)
                                     <span style="color:green">Passed</span>

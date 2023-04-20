@@ -31,6 +31,10 @@
         
         <ul class="list-unstyled components mb-5">
           <li class="active">
+            <a href="/"><span class="fa fa-home mr-3"></span> Home</a>
+          </li>
+
+          <li class="active">
             <a href="/admin/dashboard"><span class="fa fa-book mr-3"></span> Subjects</a>
           </li>
           
