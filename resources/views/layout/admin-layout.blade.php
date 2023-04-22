@@ -10,6 +10,9 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    
+    <script src="https://kit.fontawesome.com/88f917996b.js" crossorigin="anonymous"></script>
+    
     <script src="{{ asset('js/multiselect-dropdown.js') }}"></script>
     <style>
       .multiselect-dropdown {

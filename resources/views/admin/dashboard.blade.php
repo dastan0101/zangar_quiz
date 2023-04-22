@@ -28,7 +28,7 @@
                                     data-subject="{{ $subject->subject }}" 
                                     data-toggle="modal" 
                                     data-target="#editSubjectModel">
-                                Edit
+                                <i class="fa fa-cogs" aria-hidden="true"></i>
                             </button>
                         </td>
                         <td>
@@ -36,7 +36,7 @@
                                     data-id="{{ $subject->id }}" 
                                     data-toggle="modal" 
                                     data-target="#deleteSubjectModel">
-                                Delete
+                                <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </td>
                     </tr>
@@ -64,7 +64,7 @@
                     @csrf
                     <div class="modal-body">
                         <label>Subject</label>
-                        <input type="text" name="subject" required placeholder="Enter Subject Name">
+                        <input type="text" class="w-100" name="subject" required placeholder="Enter Subject Name">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -92,7 +92,7 @@
                 @csrf
                     <div class="modal-body">
                         <label>Subject</label>
-                        <input type="text" name="subject" id="edit_subject" required placeholder="Enter Subject Name">
+                        <input type="text" class="w-100" name="subject" id="edit_subject" required placeholder="Enter Subject Name">
                         <input type="hidden" name="id" id="edit_subject_id">
                     </div>
                     <div class="modal-footer">

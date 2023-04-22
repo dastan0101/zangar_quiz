@@ -28,18 +28,18 @@
                     <td>{{ $question->id }}</td>
                     <td>{{ $question->question }}</td>
                     <td>
-                        <a href="" class="ansButton btn btn-success" data-id="{{ $question->id }}" data-toggle="modal" data-target="#showAnswersModal">
-                            See Answers
+                        <a href="" class="ansButton btn bg-bg1" data-id="{{ $question->id }}" data-toggle="modal" data-target="#showAnswersModal">
+                            <i class="fa fa-eye"></i>
                         </a>
                     </td>
                     <td>
                         <button href="" class="editButton btn btn-info" data-id="{{ $question->id }}" data-toggle="modal" data-target="#editQnaModal">
-                            Edit
+                            <i class="fa fa-cogs" aria-hidden="true"></i>
                         </button>
                     </td>
                     <td>
                         <button href="" class="deleteButton btn btn-danger" data-id="{{ $question->id }}" data-toggle="modal" data-target="#deleteQnaModal">
-                            Delete
+                            <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
                     </td>
                 </tr>
@@ -118,6 +118,8 @@
                                 <textarea class="w-100" name="explanation" id="explanation" placeholder="Enter Explanation"></textarea>
                             </div>
                         </div>
+
+                        
                     </div>
 
                     <button id="addEditAnswer" class="ml-5 btn btn-info">Add Answer</button>
@@ -292,13 +294,13 @@
                         var answersLen = questions[i]['answers'].length;
                         
                         for (let j = 0; j < answersLen; j++) {
-                            let is_correct = "False";
-                            let style = "";
+                            let is_correct = '<i class="fa fa-times" aria-hidden="true"></i>';
+                            let style = 'style="color:red;"';
                             if (questions[i]['answers'][j]['is_correct'] == 1) {
-                                is_correct = "True";
+                                is_correct = '<i class="fa fa-check" aria-hidden="true"></i>';
                                 style = 'style="color:green; weight:bold;"';
                             }
-                            html += '<tr><td>'+(j+1)+'</td> <td>'+questions[i]['answers'][j]['answer']+'</td> <td '+style+'">'+is_correct+'</td> </tr>';
+                            html += '<tr><td>'+(j+1)+'</td> <td '+ style + '>'+questions[i]['answers'][j]['answer']+'</td> <td '+style+'">'+is_correct+'</td> </tr>';
                         }
                         break;
                     }
@@ -315,7 +317,7 @@
                         $(".editError").text("");
                     }, 2000);
                 } else  {
-                    var html = '<div class="row editAnswers ml-1 mt-2 mr-1"><input type="radio" name="is_correct" class="edit_is_correct"><div class="col"><input type="text" class="w-100" name="new_answers[]" placeholder="Enter Answers" required></div><button class="btn btn-danger removeBtn">Remove</button></div>';
+                    var html = '<div class="row editAnswers ml-1 mt-2 mr-1"><input type="radio" name="is_correct" class="edit_is_correct"><div class="col"><input type="text" class="w-100" name="new_answers[]" placeholder="Enter Answers" required></div><button class="btn btn-danger removeBtn"><i class="fa fa-trash" aria-hidden="true"></i></button></div>';
                 
                     $(".editModalAnswers").append(html);
                 }
@@ -345,7 +347,7 @@
                                 checked = 'checked';
                             }
 
-                            html += '<div class="row editAnswers ml-1 mt-2 mr-1"><input type="radio" '+checked+' name="is_correct" class="edit_is_correct"><div class="col"><input type="text" class="w-100" name="answers['+qna['answers'][i]['id']+']" placeholder="Enter Answers" value="'+qna['answers'][i]['answer']+'" required></div><button class="btn btn-danger removeBtn removeAnswer" data-id="'+qna['answers'][i]['id']+'">Remove</button></div>';
+                            html += '<div class="row editAnswers ml-1 mt-2 mr-1"><input type="radio" '+checked+' name="is_correct" class="edit_is_correct"><div class="col"><input type="text" class="w-100" name="answers['+qna['answers'][i]['id']+']" placeholder="Enter Answers" value="'+qna['answers'][i]['answer']+'" required></div><button class="btn btn-danger removeBtn removeAnswer" data-id="'+qna['answers'][i]['id']+'"><i class="fa fa-trash" aria-hidden="true"></i></button></div>';
                         }
                         $(".editModalAnswers").append(html);
                     }

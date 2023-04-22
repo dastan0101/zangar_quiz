@@ -25,14 +25,14 @@
                         <td>{{ $i++ }}</td>
                         <td>{{ $exam->exam_name }}</td>
                         <td>{{ $exam->marks }}</td>
-                        <td>{{ count($exam->getQnaExam) * $exam->marks}}</td>
+                        <td>{{ count($exam->getQnaExam) * $exam->marks }}</td>
                         <td>{{ $exam->pass_marks}}</td>
                         <td>
                             <button class="btn btn-primary editMarks" 
                             data-id="{{ $exam->id }}" data-marks="{{ $exam->marks }}" 
                             data-passing-marks="{{ $exam->pass_marks}}" 
                             data-totalq="{{ count($exam->getQnaExam) }}" data-toggle="modal" 
-                            data-target="#editMarksModel">Edit</button>
+                            data-target="#editMarksModel"><i class="fa fa-cogs" aria-hidden="true"></i></button>
                         </td>
                     </tr>
                 @endforeach

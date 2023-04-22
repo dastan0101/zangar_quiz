@@ -26,12 +26,12 @@
                     <td>{{ $student->email }}</td>
                     <td>
                         <button type="button" data-id="{{ $student->id }}" data-name="{{ $student->name }}" data-email="{{ $student->email }}" class="btn btn-info editButton" data-toggle="modal" data-target="#editStudentModal">
-                            Edit
+                            <i class="fa fa-cogs" aria-hidden="true"></i>
                         </button>
                     </td>
                     <td>
                         <button type="button" data-id="{{ $student->id }}" class="btn btn-danger deleteButton" data-toggle="modal" data-target="#deleteStudentModal">
-                            Delete
+                            <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
                     </td>
                 </tr>

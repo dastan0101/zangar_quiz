@@ -29,13 +29,13 @@
                         <td>{{ $exam->date }}</td>
                         <td>{{ $exam->time }}</td>
                         <td>{{ $exam->attempt }}</td>
-                        <td>{{ $exam->attempt_counter }}</td>
-                        <td><a href="#" data-code="{{ $exam->enterance_id }}" class="copy">Copy <i class="fa fa-copy"></i></a></td>
+                        <td>{{ $exam->attempt - $exam->attempt_counter }}</td>
+                        <td><a href="#" data-code="{{ $exam->enterance_id }}" class="copy"><i class="fa fa-copy fa-2x"></i></a></td>
                     </tr>
                 @endforeach
             
             @else
-                <tr><td colspan="6">Exams not found!</td></tr>
+                <tr><td style="position:absolute" colspan="6">Exams not found!</td></tr>
             @endif
 
         </tbody>
@@ -45,7 +45,7 @@
         $(document).ready(function() {
 
             $('.copy').click(function() {
-                $(this).parent().prepend('<span class="copied_text">Copied</span>');
+                $(this).parent().prepend('<span class="copied_text" style="position:absolute; margin-left:-70px; color:blue;">Copied</span>');
 
                 var code = $(this).attr('data-code');
                 var url = "{{ URL::to('/') }}/exam/"+code;

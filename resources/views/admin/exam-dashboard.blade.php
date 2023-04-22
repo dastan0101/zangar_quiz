@@ -34,17 +34,17 @@
                         <td>{{ $exam->time }} hours</td>
                         <td>{{ $exam->attempt }} time</td>
                         <td>
-                            <a class="btn btn-success addQuestion" href="#" data-id="{{ $exam->id }}" data-toggle="modal" data-target="#addQnaModel">Add</a>
+                            <a class="btn btn-success addQuestion" href="#" data-id="{{ $exam->id }}" data-toggle="modal" data-target="#addQnaModel"><i class="fa fa-plus-circle"></i></a>
                         </td>
                         <td>
-                            <a class="btn btn-success showQuestion" href="#" data-id="{{ $exam->id }}" data-toggle="modal" data-target="#showQnaModel">Show</a>
+                            <a class="btn bg-bg1 showQuestion" href="#" data-id="{{ $exam->id }}" data-toggle="modal" data-target="#showQnaModel"><i class="fa fa-eye"></i></a>
                         </td>
                         <td>
                             <button class="btn btn-info editButton" 
                                     data-id="{{ $exam->id }}" 
                                     data-toggle="modal" 
                                     data-target="#editExamModel">
-                                Edit
+                                <i class="fa fa-cogs" aria-hidden="true"></i>
                             </button>
                         </td>
                         <td>
@@ -52,7 +52,7 @@
                                     data-id="{{ $exam->id }}" 
                                     data-toggle="modal" 
                                     data-target="#deleteExamModel">
-                                Delete
+                                <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </td>
                     </tr>
@@ -79,10 +79,10 @@
                 @csrf
                     <div class="modal-body">
                         <label>Exam Name</label>
-                        <input type="text" name="exam_name" class="w-100" required placeholder="Enter Exam Name">
+                        <input type="text" name="exam_name" class="w-100 mb-3" required placeholder="Enter Exam Name">
                         <br>
                         <label>Subject</label>
-                        <select name="subject_id" class="w-100" required>
+                        <select name="subject_id" class="w-100 mb-3" required>
                             <option value="">Select Subject</option>
                             @if (count($subjects) > 0)
                                 @foreach ($subjects as $subject)
@@ -94,13 +94,13 @@
                         </select>
                         <br>
                         <label>Date</label>
-                        <input type="date" name="date" class="w-100" required min="@php echo date('Y-m-d'); @endphp">
+                        <input type="date" name="date" class="w-100 mb-3" required min="@php echo date('Y-m-d'); @endphp">
                         <br>
                         <label>Time</label>
-                        <input type="time" name="time" class="w-100" required>
+                        <input type="time" name="time" class="w-100 mb-3" required>
                         <br>
                         <label>Attempt</label>
-                        <input type="number" name="attempt" class="w-100" min="1" placeholder="Enter Exam Attempt Time" required>
+                        <input type="number" name="attempt" class="w-100 mb-3" min="1" placeholder="Enter Exam Attempt Time" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -126,10 +126,10 @@
                     <div class="modal-body">
                         <label>Exam Name</label>
                         <input type="hidden" name="exam_id" id="exam_id">
-                        <input type="text" name="exam_name" id="exam_name" required placeholder="Enter Exam Name">
+                        <input type="text" class="w-100 mb-3" name="exam_name" id="exam_name" required placeholder="Enter Exam Name">
                         <br>
                         <label>Subject</label>
-                        <select name="subject_id" id="subject_id" required>
+                        <select name="subject_id" class="w-100 mb-3" id="subject_id" required>
                             <option value="">Select Subject</option>
                             @if (count($subjects) > 0)
                                 @foreach ($subjects as $subject)
@@ -141,13 +141,13 @@
                         </select>
                         <br>
                         <label>Date</label>
-                        <input type="date" name="date" id="date" required min="@php echo date('Y-m-d'); @endphp">
+                        <input type="date" class="w-100 mb-3" name="date" id="date" required min="@php echo date('Y-m-d'); @endphp">
                         <br>
                         <label>Time</label>
-                        <input type="time" name="time" id="time" required>
+                        <input type="time" class="w-100 mb-3" name="time" id="time" required>
                         <br>
                         <label>Attempt</label>
-                        <input type="number" name="attempt" id="attempt" min="1" placeholder="Enter Exam Attempt Time" required>
+                        <input type="number" class="w-100 mb-3" name="attempt" id="attempt" min="1" placeholder="Enter Exam Attempt Time" required>
 
                     </div>
                     <div class="modal-footer">
@@ -407,7 +407,7 @@
                         if (questions.length > 0) {
                             for (let i = 0; i < questions.length; i++) {
 
-                                html += '<tr><td>'+(i+1)+'</td><td>'+questions[i]['question'][0]['question']+'</td><td><button class="btn btn-danger deleteQuestion" data-id="'+questions[i]['id']+'">Delete</button></td></tr>';
+                                html += '<tr><td>'+(i+1)+'</td><td>'+questions[i]['question'][0]['question']+'</td><td><button class="btn btn-danger deleteQuestion" data-id="'+questions[i]['id']+'"><i class="fa fa-trash" aria-hidden="true"></i></button></td></tr>';
 
                             }
                         } else {
