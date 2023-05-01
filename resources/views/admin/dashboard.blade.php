@@ -12,6 +12,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Subject</th>
+                <th scope="col">Teacher</th>
                 <th scope="col">Edit</th>
                 <th scope="col">Delete</th>
             </tr>
@@ -25,9 +26,21 @@
                             <a href="/admin/course-{{ $subject->id }}" id="go_subject" data-id="{{ $subject->id }}">{{ $subject->subject }}</a>
                         </td>
                         <td>
+                            @php
+                            $teacher_name = '';
+                                foreach ($teachers as $teacher) {
+                                   if ($teacher['id'] === $subject->teacher_id) {
+                                        $teacher_name = $teacher['name'];
+                                   }
+                                }
+                            @endphp
+                            {{ $teacher_name }}
+                        </td>
+                        <td>
                             <button class="btn btn-info editButton" 
                                     data-id="{{ $subject->id }}" 
                                     data-subject="{{ $subject->subject }}" 
+                                    data-teacher_id="{{ $subject->teacher_id }}" 
                                     data-toggle="modal" 
                                     data-target="#editSubjectModel">
                                 <i class="fa fa-cogs" aria-hidden="true"></i>
@@ -67,6 +80,17 @@
                     <div class="modal-body">
                         <label>Subject</label>
                         <input type="text" class="w-100" name="subject" required placeholder="Enter Subject Name">
+                        <label>Teacher</label>
+                        <select name="teacher_id" class="w-100 mb-3" required>
+                            <option value="">Select Teacher</option>
+                            @if (count($teachers) > 0)
+                                @foreach ($teachers as $teacher)
+                                    <option class="w-100" value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                                @endforeach
+                            @else
+                                <option class="w-100" value="There are no teachers yet)">There are no teachers yet</option>
+                            @endif
+                        </select>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -96,6 +120,17 @@
                         <label>Subject</label>
                         <input type="text" class="w-100" name="subject" id="edit_subject" required placeholder="Enter Subject Name">
                         <input type="hidden" name="id" id="edit_subject_id">
+                        <label>Teacher</label>
+                        <select name="teacher_id" class="w-100 mb-3" id="edit_teacher_id" required>
+                            <option value="">Select Teacher</option>
+                            @if (count($teachers) > 0)
+                                @foreach ($teachers as $teacher)
+                                    <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                                @endforeach
+                            @else
+                                
+                            @endif
+                        </select>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -158,9 +193,11 @@
             $(".editButton").click(function() {
                 var subject_id = $(this).attr('data-id');
                 var subject = $(this).attr('data-subject');
+                var teacher_id = $(this).attr('data-teacher_id');
 
                 $("#edit_subject_id").val(subject_id);
                 $("#edit_subject").val(subject);
+                $("#edit_teacher_id").val(teacher_id);
             });
 
             $("#editSubject").submit(function(e) {

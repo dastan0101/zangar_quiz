@@ -30,7 +30,8 @@ class AdminController extends Controller {
     public function addSubject(Request $request) {
         try {
             Subject::insert([
-                'subject' => $request->subject
+                'subject' => $request->subject,
+                'teacher_id' => $request->teacher_id
             ]);
             return response()->json(['success'=>true, 'msg'=>'Subject added successfully!']);
 
@@ -43,6 +44,7 @@ class AdminController extends Controller {
         try {
             $subject = Subject::find($request->id);
             $subject->subject = $request->subject;
+            $subject->teacher_id = $request->teacher_id;
             $subject->save();
             return response()->json(['success'=>true, 'msg'=>'Subject edited successfully!']);
 

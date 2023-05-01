@@ -86,7 +86,8 @@ class AuthController extends Controller
 
     public function adminDashboard() {
         $subjects = Subject::all();
-        return view('admin.dashboard', compact('subjects'));
+        $teachers = User::where('is_admin', '2')->get();
+        return view('admin.dashboard', compact('subjects', 'teachers'));
     }
 
     public function teacherDashboard() {
