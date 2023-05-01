@@ -84,6 +84,15 @@ Route::group(['middleware'=>['web', 'checkAdmin']], function(){
     Route::get('/get-reviewed-qna', [AdminController::class, 'reviewQna'])->name('reviewQna');
 
     Route::post('/approved-qna', [AdminController::class, 'approvedQna'])->name('approvedQna');
+
+    // course material
+    Route::get('/admin/course-{id}', [AdminController::class, 'courseDashboard']);
+    Route::post('/add-course-materials', [AdminController::class, 'addCourseMaterials'])->name('addCourseMaterials');
+    Route::get('/get-course-material/{id}', [AdminController::class, 'getCourseMaterial'])->name('getCourseMaterial');
+    Route::get('/download-presentation/{presentation}', [AdminController::class, 'downloadCoursePresentation'])->name('downloadCoursePresentation');
+    Route::post('/edit-course-materials', [AdminController::class, 'editCourseMaterial'])->name('editCourseMaterial');
+    Route::post('/delete-course-material', [AdminController::class, 'deleteCourseMaterial'])->name('deleteCourseMaterial');
+    
 });
 
 Route::group(['middleware'=>['web', 'checkStudent']], function(){

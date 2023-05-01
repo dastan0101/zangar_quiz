@@ -21,7 +21,9 @@
                 @foreach ($subjects as $subject)
                     <tr>
                         <td>{{ $subject->id }}</td>
-                        <td>{{ $subject->subject }}</td>
+                        <td>
+                            <a href="/admin/course-{{ $subject->id }}" id="go_subject" data-id="{{ $subject->id }}">{{ $subject->subject }}</a>
+                        </td>
                         <td>
                             <button class="btn btn-info editButton" 
                                     data-id="{{ $subject->id }}" 
@@ -205,6 +207,7 @@
                     }
                 })
             });
+
         });
     </script>
 

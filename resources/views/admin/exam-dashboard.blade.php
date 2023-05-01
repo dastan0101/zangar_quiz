@@ -293,7 +293,7 @@
                         }
                     }
 
-                })
+                });
             });
 
             $("#editExam").submit(function(e) {

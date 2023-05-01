@@ -196,6 +196,10 @@ button:focus {
   outline: 1px dotted;
   outline: 5px auto -webkit-focus-ring-color; }
 
+.editButton {
+  margin-bottom: 1rem;
+}
+
 input,
 button,
 select,
@@ -3580,7 +3584,11 @@ input[type="button"].btn-block {
   .navbar-expand-md > .container,
   .navbar-expand-md > .container-fluid {
     padding-right: 0;
-    padding-left: 0; } }
+    padding-left: 0; } 
+  .editButton {
+    margin-bottom: 0;
+  }
+  }
 
 @media (min-width: 768px) {
   .navbar-expand-md {
@@ -8361,3 +8369,8 @@ a[data-toggle="collapse"] {
 
 .subscribe-form .form-control {
   background: #4897fc; }
+
+  .colum {
+    display: flex;
+    flex-direction: column;
+  }
