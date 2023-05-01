@@ -2,25 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Subject;
 use App\Models\Exam;
-use App\Models\Question;
-use App\Models\Answer;
 use App\Models\User;
+use App\Models\Answer;
 use App\Models\QnaExam;
-
+use App\Models\Subject;
+use App\Models\Question;
 use App\Imports\QnaImport;
+
 use App\Models\ExamAnswer;
 use App\Models\ExamAttempt;
-use Maatwebsite\Excel\Facades\Excel;
-
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\URL;
+use Illuminate\Http\Request;
+use App\Models\CourseMaterials;
 
-use function GuzzleHttp\Promise\all;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
+
+use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller {
 
@@ -491,5 +492,112 @@ class AdminController extends Controller {
         }
 
     }
+
+    public function courseDashboard($id) {
+        $subject = Subject::find($id);
+        $course_material = CourseMaterials::where('course_id', $id)->get();
+        return view('admin.course', compact('subject', 'course_material'));
+    }
+
+    public function addCourseMaterials(Request $request) {
+        try {
+            $course_material = new CourseMaterials();
+            $course_material->course_id = $request->input('course_id');
+            $course_material->title = $request->input('title');
+            $course_material->description = request('description');
+            
+            if ($request->hasFile('presentation')) {
+                $file = $request->file('presentation');
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() . "." . $extension;
+                $file->move('uploads/slides/', $filename);
+                $course_material->presentation = $filename;
+            } else {
+                $course_material->presentation = 'nofile';
+            }
+            if ($request->hasFile('video')) {
+                $file = $request->file('video');
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() . "." . $extension;
+                $file->move('uploads/videos/', $filename);
+                $course_material->video = $filename;
+            } else {
+                $course_material->video = 'nofile';
+            }
+            $course_material->save();
+            
+            return response()->json(['success'=>true, 'msg'=>'Course Materials added successfully!']);
+
+        } catch(\Exception $e) {
+            return response()->json(['success'=>false, 'msg'=>$e->getMessage()]);
+        }
+    }
+
+    public function getCourseMaterial($id) {
+        try {
+            $course_material = CourseMaterials::where('id',$id)->get();
+            return response()->json(['success'=>true, 'data'=>$course_material]);
+
+        } catch(\Exception $e) {
+            return response()->json(['success'=>false, 'msg'=>$e->getMessage()]);
+        }
+    }
+
+    public function downloadCoursePresentation(Request $request, $presentation) {
+
+        return response()->download(public_path('/uploads/slides/' . $presentation));
+
+    }
+
+    public function editCourseMaterial(Request $request) {
+        try {
+            $course_material = CourseMaterials::find($request->id);
+            $course_material->title = $request->title;
+            $course_material->description = $request->description;
+            if ($request->hasFile('presentation')) {
+                $destination = 'uploads/slides/'.$course_material->presentation;
+                if (File::exists($destination)) {
+                    File::delete($destination);
+                }
+                $file = $request->file('presentation');
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() . "." . $extension;
+                $file->move('uploads/slides/', $filename);
+                $course_material->presentation = $filename;
+            } else {
+                $course_material->presentation = 'nofile';
+            }
+            if ($request->hasFile('video')) {
+                $destination = 'uploads/videos/'.$course_material->video;
+                if (File::exists($destination)) {
+                    File::delete($destination);
+                }
+                $file = $request->file('video');
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() . "." . $extension;
+                $file->move('uploads/videos/', $filename);
+                $course_material->video = $filename;
+            } else {
+                $course_material->video = 'nofile';
+            }
+            
+            $course_material->update();
+            return response()->json(['success'=>true, 'msg'=>'Course Material edited successfully!']);
+
+        } catch(\Exception $e) {
+            return response()->json(['success'=>false, 'msg'=>$e->getMessage()]);
+        }
+    }
+
+    public function deleteCourseMaterial(Request $request) {
+        try {
+            CourseMaterials::where('id', $request->id)->delete();
+            return response()->json(['success'=>true, 'msg'=>'Course Material deleted successfully!']);
+
+        } catch(\Exception $e) {
+            return response()->json(['success'=>false, 'msg'=>$e->getMessage()]);
+        }
+    }    
+
 }
  
