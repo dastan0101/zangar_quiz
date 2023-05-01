@@ -95,6 +95,16 @@ Route::group(['middleware'=>['web', 'checkAdmin']], function(){
     
 });
 
+Route::group(['middleware'=>['web', 'checkTeacher']], function(){
+    Route::get('/teacher/dashboard', [AuthController::class, 'teacherDashboard']);
+    Route::get('/exam/{id}', [ExamController::class, 'loadExamDashboard']);
+
+    Route::post('/exam-submit', [ExamController::class, 'examSubmit'])->name('examSubmit');
+
+    Route::get('/results', [ExamController::class, 'resultDashboard'])->name('resultDashboard');
+    Route::get('/review-student-qna', [ExamController::class, 'reviewQna'])->name('reviewStudentQna');
+});
+
 Route::group(['middleware'=>['web', 'checkStudent']], function(){
     Route::get('/dashboard', [AuthController::class, 'loadDashboard']);
     Route::get('/exam/{id}', [ExamController::class, 'loadExamDashboard']);

@@ -25,6 +25,8 @@ class AuthController extends Controller
             return redirect('/admin/dashboard');
         } else if(Auth::user() && Auth::user()->is_admin == 0) {
             return redirect('/dashboard');
+        } else if(Auth::user() && Auth::user()->is_admin == 2) {
+            return redirect('/teacher/dashboard');
         }
         return view('register');
     }
@@ -50,6 +52,8 @@ class AuthController extends Controller
             return redirect('/admin/dashboard');
         } else if(Auth::user() && Auth::user()->is_admin == 0) {
             return redirect('/dashboard');
+        } else if(Auth::user() && Auth::user()->is_admin == 2) {
+            return redirect('/teacher/dashboard');
         }
         return view('login');
     }
@@ -64,6 +68,8 @@ class AuthController extends Controller
         if(Auth::attempt($userCredential)) {
             if(Auth::user()->is_admin == 1) {
                 return redirect('/admin/dashboard');
+            } else if(Auth::user()->is_admin == 2) {
+                return redirect('/teacher/dashboard');
             } else {
                 return redirect('/dashboard');
             }
@@ -83,6 +89,11 @@ class AuthController extends Controller
         return view('admin.dashboard', compact('subjects'));
     }
 
+    public function teacherDashboard() {
+        $subjects = Subject::all();
+        return view('teacher.dashboard', compact('subjects'));
+    }
+    
     public function logout(Request $request) {
         $request->session()->flush();
         Auth::logout();
