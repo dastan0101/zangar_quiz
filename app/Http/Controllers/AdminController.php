@@ -497,8 +497,9 @@ class AdminController extends Controller {
 
     public function courseDashboard($id) {
         $subject = Subject::find($id);
+        $teacher = User::find($subject->teacher_id);
         $course_material = CourseMaterials::where('course_id', $id)->get();
-        return view('admin.course', compact('subject', 'course_material'));
+        return view('admin.course', compact('subject', 'course_material', 'teacher'));
     }
 
     public function addCourseMaterials(Request $request) {

@@ -19,8 +19,7 @@
             </tr>
             <tr>
                 <th scope="row">Teacher Name</th>
-                <td>First & Last Name</td>
-                
+                <td>{{ $teacher->name }}</td>
             </tr>
             
         </tbody>
