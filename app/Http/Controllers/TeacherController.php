@@ -419,4 +419,9 @@ class TeacherController extends Controller
         }
     }
 
+    public function teacherStudentsDashboard() {
+        $students = User::where('is_admin', 0)->get();
+        return view('teacher.students-dashboard', compact('students'));
+    }
+    
 }

@@ -135,6 +135,8 @@ Route::group(['middleware'=>['web', 'checkTeacher']], function(){
     Route::get('/teacher/delete-question-answer', [TeacherController::class, 'teacherDeleteQna'])->name('teacherDeleteQna');
     Route::post('/teacher/import-question-answer', [TeacherController::class, 'teacherImportQna'])->name('teacherImportQna');
     
+    // Students
+    Route::get('/teacher/students', [TeacherController::class, 'teacherStudentsDashboard']);
 });
 
 

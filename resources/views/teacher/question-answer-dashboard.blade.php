@@ -1,4 +1,4 @@
-@extends('layout/admin-layout')
+@extends('layout/teacher-layout')
 
 @section('space-work')
 
