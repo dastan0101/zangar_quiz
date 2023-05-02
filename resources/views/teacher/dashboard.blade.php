@@ -13,12 +13,14 @@
         <tbody>
             @if (count($subjects) > 0)
                 @foreach ($subjects as $subject)
+                @if ($subject->teacher_id === Auth::user()->id)
                     <tr>
                         <td>{{ $subject->id }}</td>
                         <td>
-                            <a href="/admin/course-{{ $subject->id }}" id="go_subject" data-id="{{ $subject->id }}">{{ $subject->subject }}</a>
+                            <a href="/teacher/course-{{ $subject->id }}" id="go_subject" data-id="{{ $subject->id }}">{{ $subject->subject }}</a>
                         </td>
                     </tr>
+                @endif
                 @endforeach
             @else
                 <tr>

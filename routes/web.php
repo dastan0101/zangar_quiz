@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ExamController;
+use App\Http\Controllers\TeacherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,15 +96,39 @@ Route::group(['middleware'=>['web', 'checkAdmin']], function(){
     
 });
 
+
+
+
+
 Route::group(['middleware'=>['web', 'checkTeacher']], function(){
     Route::get('/teacher/dashboard', [AuthController::class, 'teacherDashboard']);
-    Route::get('/exam/{id}', [ExamController::class, 'loadExamDashboard']);
+    Route::get('/teacher/course-{id}', [TeacherController::class, 'teacherCourseDashboard']);
+    Route::post('/teacher/add-course-materials', [TeacherController::class, 'teacherAddCourseMaterials'])->name('teacherAddCourseMaterials');
+    Route::get('/teacher/get-course-material/{id}', [TeacherController::class, 'teacherGetCourseMaterial'])->name('teacherGetCourseMaterial');
+    Route::get('/teacher/download-presentation/{presentation}', [TeacherController::class, 'teacherDownloadCoursePresentation'])->name('teacherDownloadCoursePresentation');
+    Route::post('/teacher/edit-course-materials', [TeacherController::class, 'teacherEditCourseMaterial'])->name('teacherEditCourseMaterial');
+    Route::post('/teacher/delete-course-material', [TeacherController::class, 'teacherDeleteCourseMaterial'])->name('teacherDeleteCourseMaterial');
+    
+    // exam
+    Route::get('/teacher/exam', [TeacherController::class, 'teacherExamDashboard']);
+    Route::post('/teacher/add-exam', [TeacherController::class, 'teacherAddExam'])->name('teacherAddExam');
+    Route::get('/teacher/get-exam-detail/{id}', [TeacherController::class, 'teacherGetExamDetail'])->name('teacherGetExamDetail');
+    Route::post('/teacher/edit-exam', [TeacherController::class, 'teacherEditExam'])->name('teacherEditExam');
+    Route::post('/teacher/delete-exam', [TeacherController::class, 'teacherDeleteExam'])->name('teacherDeleteExam');
 
-    Route::post('/exam-submit', [ExamController::class, 'examSubmit'])->name('examSubmit');
+    // add question and answer to exam
+    Route::get('/teacher/get-questions', [TeacherController::class, 'teacherGetQuestions'])->name('teacherGetQuestions');
+    Route::post('/teacher/add-questions', [TeacherController::class, 'teacherAddQuestions'])->name('teacherAddQuestions');
+    Route::get('/teacher/get-exam-questions', [TeacherController::class, 'teacherGetExamQuestions'])->name('teacherGetExamQuestions');
+    Route::get('/teacher/delete-exam-questions', [TeacherController::class, 'teacherDeleteExamQuestions'])->name('teacherDeleteExamQuestions');
 
-    Route::get('/results', [ExamController::class, 'resultDashboard'])->name('resultDashboard');
-    Route::get('/review-student-qna', [ExamController::class, 'reviewQna'])->name('reviewStudentQna');
 });
+
+
+
+
+
+
 
 Route::group(['middleware'=>['web', 'checkStudent']], function(){
     Route::get('/dashboard', [AuthController::class, 'loadDashboard']);
