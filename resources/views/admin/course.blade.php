@@ -91,12 +91,12 @@
                         
                         <div class="colum mt-2">
                             <label for="">Presentation</label>
-                            <input type="file" class="form-control-input w-100" name="presentation" id="inputFile1">
+                            <input type="file" class="form-control-input w-100" name="presentation" id="inputFile1" accept=".ppt, .pptx, .pdf, .doc, .docx">
                         </div>
 
                         <div class="colum mt-2">
                             <label for="">Video</label>
-                            <input type="file" class="form-control-input w-100" name="video" id="inputFile2">
+                            <input type="file" class="form-control-input w-100" name="video" id="inputFile2" accept=".mp4, .mov, .org">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -135,7 +135,7 @@
                         
                         <div class="colum mt-2">
                             <label for="">Presentation</label>
-                            <input type="file" class="form-control-input w-100" name="presentation" id="edit_presentation" required accept=".ppt, .pptx, .pdf, .jpeg, .jpg, .png">
+                            <input type="file" class="form-control-input w-100" name="presentation" id="edit_presentation" required accept=".ppt, .pptx, .pdf, .doc, .docx">
                         </div>
 
                         <div class="colum mt-2">
