@@ -122,11 +122,19 @@ Route::group(['middleware'=>['web', 'checkTeacher']], function(){
     Route::get('/teacher/get-exam-questions', [TeacherController::class, 'teacherGetExamQuestions'])->name('teacherGetExamQuestions');
     Route::get('/teacher/delete-exam-questions', [TeacherController::class, 'teacherDeleteExamQuestions'])->name('teacherDeleteExamQuestions');
 
-    
     // marks 
     Route::get('/teacher/marks', [TeacherController::class, 'teacherMarksDashboard']);
     Route::post('/teacher/edit-marks', [TeacherController::class, 'teacherEditMarks'])->name('teacherEditMarks');
 
+    // question and answer
+    Route::get('/teacher/question-answer', [TeacherController::class, 'teacherQuestionAnswerDashboard']);
+    Route::post('/teacher/add-question-answer', [TeacherController::class, 'teacherAddQna'])->name('teacherAddQna');
+    Route::get('/teacher/get-question-answer-details', [TeacherController::class, 'teacherGetQnaExamDetails'])->name('teacherGetQnaExamDetails');
+    Route::get('/teacher/delete-answer', [TeacherController::class, 'teacherDeleteAnswer'])->name('teacherDeleteAnswer');
+    Route::post('/teacher/edit-question-answer', [TeacherController::class, 'teacherEditQna'])->name('teacherEditQna');
+    Route::get('/teacher/delete-question-answer', [TeacherController::class, 'teacherDeleteQna'])->name('teacherDeleteQna');
+    Route::post('/teacher/import-question-answer', [TeacherController::class, 'teacherImportQna'])->name('teacherImportQna');
+    
 });
 
 
