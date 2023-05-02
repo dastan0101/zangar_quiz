@@ -264,4 +264,40 @@ class TeacherController extends Controller
         }
     }
 
+    // add marks
+    public function teacherMarksDashboard() {
+        $subjects = Subject::where('teacher_id', Auth::user()->id)->get();
+        $all_exams = Exam::with('subjects')->with('getQnaExam')->get();
+        $exams = collect();
+        foreach ($subjects as $subject) {
+            foreach ($all_exams as $exam) {
+                if ($exam->subject_id === $subject->id) {
+                    $exams->push($exam);
+                }
+            }
+            
+        }
+        // $exams = Exam::where('subject_id', )->with('getQnaExam')->get();
+
+        return view('teacher.marks-dashboard', compact('exams'));
+    }
+
+    // edit marks
+    public function teacherEditMarks(Request $request) {
+
+        try {
+            
+            Exam::where('id', $request->exam_id)->update([
+                'marks' => $request->marks,
+                'pass_marks' => $request->pass_marks
+            ]);
+
+            return response()->json(['success'=>true, 'msg'=>'Marks edited successfully!']);
+
+        } catch(\Exception $e) {
+            return response()->json(['success'=>false, 'msg'=>$e->getMessage()]);
+        }
+
+    }
+
 }

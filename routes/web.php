@@ -122,6 +122,11 @@ Route::group(['middleware'=>['web', 'checkTeacher']], function(){
     Route::get('/teacher/get-exam-questions', [TeacherController::class, 'teacherGetExamQuestions'])->name('teacherGetExamQuestions');
     Route::get('/teacher/delete-exam-questions', [TeacherController::class, 'teacherDeleteExamQuestions'])->name('teacherDeleteExamQuestions');
 
+    
+    // marks 
+    Route::get('/teacher/marks', [TeacherController::class, 'teacherMarksDashboard']);
+    Route::post('/teacher/edit-marks', [TeacherController::class, 'teacherEditMarks'])->name('teacherEditMarks');
+
 });
 
 
