@@ -137,6 +137,12 @@ Route::group(['middleware'=>['web', 'checkTeacher']], function(){
     
     // Students
     Route::get('/teacher/students', [TeacherController::class, 'teacherStudentsDashboard']);
+
+    // review exams
+    Route::get('/teacher/review-exams', [TeacherController::class, 'teacherReviewExams'])->name('teacherReviewExams');
+    Route::get('/teacher/get-reviewed-qna', [TeacherController::class, 'teacherReviewQna'])->name('teacherReviewQna');
+    Route::post('/teacher/approved-qna', [TeacherController::class, 'teacherApprovedQna'])->name('teacherApprovedQna');
+
 });
 
 
