@@ -37,7 +37,7 @@
                         <div class="card-body">
                             <h3 class="card-title">{{ $lesson->title }}</h3>
                             <p class="card-text">{{ $lesson->description }}</p>
-                            <h6><a href="{{ url('/download-presentation', $lesson->presentation) }}"><i class="fa-solid fa-file-powerpoint"></i>  {{ $lesson->presentation }}</a></h6>
+                            <h6><a href="{{ url('/teacher/download-presentation', $lesson->presentation) }}"><i class="fa-solid fa-file-powerpoint"></i>  {{ $lesson->presentation }}</a></h6>
                             <p class="card-text"><small class="text-muted">{{ $lesson->updated_at }}</small></p>
                         </div>
                     </div>
@@ -185,7 +185,7 @@
                 $('.add-section').html('Please Wait <i class="fa fa-spinner fa-spin"></i>')
 
                 $.ajax({
-                    url:"{{ route('addCourseMaterials') }}",
+                    url:"{{ route('teacherAddCourseMaterials') }}",
                     method:"POST",
                     data:new FormData(this),
                     dataType:'JSON',
@@ -208,7 +208,7 @@
 
                 $("#edit_course_material_id").val(id);
 
-                var url = '{{ route("getCourseMaterial", "id") }}';
+                var url = '{{ route("teacherGetCourseMaterial", "id") }}';
                 url = url.replace('id', id);
 
                 $.ajax({
@@ -234,7 +234,7 @@
                 e.preventDefault();
 
                 $.ajax({
-                    url:"{{ route('editCourseMaterial') }}",
+                    url:"{{ route('teacherEditCourseMaterial') }}",
                     type:"POST",
                     data:new FormData(this),
                     dataType:'JSON',
@@ -262,7 +262,7 @@
                 e.preventDefault();
 
                 $.ajax({
-                    url:"{{ route('deleteCourseMaterial') }}",
+                    url:"{{ route('teacherDeleteCourseMaterial') }}",
                     type:"POST",
                     data:new FormData(this),
                     dataType:'JSON',
@@ -276,7 +276,7 @@
                             alert(data.msg);
                         }
                     }
-                })
+                });
             });
 
         });

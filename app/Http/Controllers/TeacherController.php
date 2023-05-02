@@ -445,7 +445,6 @@ class TeacherController extends Controller
         return view('teacher.review-exams', compact('attempts'));
     }
     
-
     public function teacherReviewQna(Request $request) {
 
         try {
