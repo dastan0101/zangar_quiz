@@ -431,7 +431,17 @@ class TeacherController extends Controller
     // load review exams page
     public function teacherReviewExams() {
 
-        $attempts = ExamAttempt::with(['user', 'exam'])->orderBy('id')->get();
+        $subjects = Subject::where('teacher_id', Auth::user()->id)->get();
+        $all_attempts = ExamAttempt::with(['user', 'exam'])->orderBy('id')->get();
+        $attempts = collect();
+        foreach ($all_attempts as $attempt) {
+            foreach ($subjects as $subject) {
+                if ($attempt->exam->subject_id === $subject->id) {
+                    $attempts->push($attempt);
+                }
+            }
+        }
+        
         return view('teacher.review-exams', compact('attempts'));
     }
     
