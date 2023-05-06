@@ -27,7 +27,10 @@
         
         <ul class="list-unstyled components mb-5">
           <li class="active">
-            <a href="/dashboard"><span class="fa fa-book mr-3"></span> Dashboard</a>
+            <a href="/courses"><span class="fa fa-book mr-3"></span> Courses</a>
+          </li>
+          <li class="active">
+            <a href="/exams"><span class="fa fa-book mr-3"></span> Exams</a>
           </li>
           <li class="active">
             <a href="{{ route('resultDashboard') }}"><span class="fa fa-list-alt mr-3"></span> Results</a>

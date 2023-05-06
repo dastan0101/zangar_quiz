@@ -55,7 +55,11 @@ class AdminController extends Controller {
 
     public function deleteSubject(Request $request) {
         try {
-            Subject::where('id', $request->id)->delete();
+            $subject = Subject::find($request->id);
+            $exam = Exam::find($subject->id);
+            ExamAttempt::where('exam_id', $exam->id)->delete();
+            $exam->delete();
+            $subject->delete();
             return response()->json(['success'=>true, 'msg'=>'Subject deleted successfully!']);
 
         } catch(\Exception $e) {
