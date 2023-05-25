@@ -25,9 +25,12 @@
         </thead>
         <tbody>
             @if (count($exams) > 0)
+                @php
+                    $count = 1;
+                @endphp
                 @foreach ($exams as $exam)
                     <tr>
-                        <td>{{ $exam->id }}</td>
+                        <td>{{ $count++ }}</td>
                         <td>{{ $exam->exam_name }}</td>
                         <td>{{ $exam->subjects[0]['subject'] }}</td>
                         <td>{{ $exam->date }}</td>

@@ -80,8 +80,9 @@ class AuthController extends Controller
     }
 
     public function loadDashboard() {
-        $exams = Exam::with('subjects')->orderBy('date')->get();
-        return view('student.dashboard', ['exams'=>$exams]);
+        $subjects = Subject::all();
+        $teachers = User::where('is_admin', '2')->get();
+        return view('student.courses-dashboard', compact('subjects', 'teachers'));
     }
 
     public function adminDashboard() {

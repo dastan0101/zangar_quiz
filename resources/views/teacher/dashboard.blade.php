@@ -8,16 +8,21 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Subject</th>
+                <th scope="col">Teacher</th>
             </tr>
         </thead>
         <tbody>
             @if (count($subjects) > 0)
+
                 @foreach ($subjects as $subject)
                 @if ($subject->teacher_id === Auth::user()->id)
                     <tr>
                         <td>{{ $subject->id }}</td>
                         <td>
                             <a href="/teacher/course-{{ $subject->id }}" id="go_subject" data-id="{{ $subject->id }}">{{ $subject->subject }}</a>
+                        </td>
+                        <td>
+                            {{ Auth::user()->name }} (You)
                         </td>
                     </tr>
                 @endif

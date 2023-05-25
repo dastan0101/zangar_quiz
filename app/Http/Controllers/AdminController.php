@@ -61,7 +61,6 @@ class AdminController extends Controller {
             $exam->delete();
             $subject->delete();
             return response()->json(['success'=>true, 'msg'=>'Subject deleted successfully!']);
-
         } catch(\Exception $e) {
             return response()->json(['success'=>false, 'msg'=>$e->getMessage()]);
         }

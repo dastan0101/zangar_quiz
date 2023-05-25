@@ -27,7 +27,7 @@
         
         <ul class="list-unstyled components mb-5">
           <li class="active">
-            <a href="/courses"><span class="fa fa-book mr-3"></span> Courses</a>
+            <a href="/dashboard"><span class="fa fa-book mr-3"></span> Courses</a>
           </li>
           <li class="active">
             <a href="/exams"><span class="fa fa-book mr-3"></span> Exams</a>

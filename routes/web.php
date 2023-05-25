@@ -99,8 +99,6 @@ Route::group(['middleware'=>['web', 'checkAdmin']], function(){
 
 
 
-
-
 Route::group(['middleware'=>['web', 'checkTeacher']], function(){
     Route::get('/teacher/dashboard', [AuthController::class, 'teacherDashboard']);
     Route::get('/teacher/course-{id}', [TeacherController::class, 'teacherCourseDashboard']);
@@ -153,9 +151,9 @@ Route::group(['middleware'=>['web', 'checkTeacher']], function(){
 
 
 Route::group(['middleware'=>['web', 'checkStudent']], function(){
-    Route::get('/exams', [AuthController::class, 'loadDashboard']);
+    Route::get('/dashboard', [AuthController::class, 'loadDashboard']);
 
-    Route::get('/courses', [StudentController::class, 'loadCoursesDashboard']);
+    Route::get('/exams', [StudentController::class, 'loadExam']);
     Route::get('/student/course-{id}', [StudentController::class, 'loadCourse']);
 
 

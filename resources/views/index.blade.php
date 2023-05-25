@@ -130,7 +130,7 @@
                             is a one semester course for non-math and 
                             non-science majors integrating numeracy.
                         </p>
-                        <button class="start_button">START</button>
+                        <button class="start_button"><a href="">START</a></button>
                     </div>
                 </div>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Exam;
 use App\Models\User;
 use App\Models\Subject;
 use Illuminate\Http\Request;
@@ -21,4 +22,10 @@ class StudentController extends Controller
         $course_material = CourseMaterials::where('course_id', $id)->get();
         return view('student.course', compact('subject', 'course_material', 'teacher'));
     }
+
+    public function loadExam() {
+        $exams = Exam::with('subjects')->orderBy('date')->get();
+        return view('student.dashboard', ['exams'=>$exams]);
+    }
+    
 }
